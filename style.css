@@ -1,6 +1,12 @@
 /* ==========================================================================
  1. ПАЛИТРА И БАЗОВЫЕ НАСТРОЙКИ
  ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box !important;
+}
+
 :root {
     --bg-black: #020308;
     --bg-panel: #060919;
@@ -20,7 +26,6 @@ body {
     font-family: 'Share Tech Mono', monospace;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     overflow-x: hidden;
     min-height: 100vh;
 }
@@ -45,7 +50,7 @@ body {
     color: var(--text-muted) !important;
 }
 
-/* Кастомный тонкий скроллбар */
+/* Кастомный тонкий скроллбар дисплея */
 ::-webkit-scrollbar {
     width: 4px;
     background: var(--bg-black);
@@ -99,7 +104,7 @@ body {
 .cyber-hud-header {
     background-color: var(--bg-panel);
     border: 1px solid var(--cyber-magenta);
-    /* Тонкая сплошная рамка по всему периметру */
+    /* Одна ультратонкая сплошная рамка */
     padding: 25px 20px 20px 20px;
     margin: 15px;
     position: relative;
@@ -140,7 +145,7 @@ body {
     gap: 10px;
 }
 
-/* КНОПКИ МЕНЮ */
+/* КНОПКИ НАВИГАЦИИ */
 .nav-box {
     display: flex;
     align-items: center;
@@ -214,15 +219,18 @@ body {
     height: 100%;
 }
 
-/* ЕДИНЫЙ КЛАСС ДЛЯ ВСЕХ ОКОН (СПЛОШНЫЕ И ТОНКИЕ РАМКИ) */
+/* БАЗОВЫЙ КЛАСС ДЛЯ ВСЕХ ОКОН (АВТО-ВЫСОТА И ЖЕСТКАЯ ИЗОЛЯЦИЯ) */
 .flat-panel {
     background-color: var(--bg-panel);
     border: 1px solid var(--text-muted);
-    /* Исходный сдержанный цвет рамки */
     position: relative;
     padding: 30px 20px;
     margin-bottom: 20px;
     flex-grow: 1;
+    height: auto !important;
+    /* Убираем любые фиксы высоты для безопасности адаптива */
+    display: flex;
+    flex-direction: column;
     animation: panelInit 0.6s cubic-bezier(0.19, 1, 0.22, 1) both;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -239,7 +247,7 @@ body {
     }
 }
 
-/* ЦВЕТОВЫЕ КЛАССЫ РАМОК ДЛЯ КАЖДОЙ КОЛОНКИ */
+/* ЦВЕТОВЫЕ СТРУКТУРНЫЕ МОДИФИКАТОРЫ */
 .border-magenta {
     border-color: var(--cyber-magenta);
 }
@@ -287,7 +295,7 @@ body {
     background-color: var(--cyber-copper);
 }
 
-/* Аватар */
+/* Аватар-Сканер */
 .matrix-avatar {
     width: 100%;
     height: 160px;
@@ -344,7 +352,7 @@ body {
     gap: 10px;
 }
 
-/* КНОПКИ СВЯЗИ */
+/* КНОПКИ-ССЫЛКИ */
 .btn-flat {
     text-decoration: none;
     font-weight: bold;
@@ -415,7 +423,7 @@ body {
     background-color: var(--cyber-turquoise);
 }
 
-/* Боксы логов и консоли */
+/* Терминальные контейнеры */
 .console-box,
 .stream-box {
     background-color: #000 !important;
@@ -439,17 +447,24 @@ body {
     padding-bottom: 6px;
 }
 
+/* Контейнер репозиториев */
 .portfolio-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: auto !important;
 }
 
+/* КАРТОЧКА ПОРТФОЛИО С ФИКСОМ ВЫСОТЫ */
 .matrix-card {
     border: 1px solid var(--text-muted);
     background-color: var(--bg-panel);
     padding: 25px;
     border-left: 4px solid var(--cyber-turquoise);
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    /* Автоматический расчет высоты под кнопки */
     transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -486,9 +501,10 @@ body {
     display: flex;
     gap: 15px;
     margin-top: 15px;
+    width: 100%;
 }
 
-/* КНОПКИ В КАРТОЧКАХ ПОРТФОЛИО */
+/* ТАКТИЧЕСКИЕ КНОПКИ */
 .action-btn {
     display: inline-block;
     padding: 12px 24px;
@@ -497,6 +513,7 @@ body {
     font-size: 0.95rem;
     border: 1px solid transparent;
     transition: all 0.15s ease;
+    box-sizing: border-box;
 }
 
 .block-magenta {
@@ -532,52 +549,197 @@ body {
     padding: 20px 0;
     font-size: 1rem;
 }
-
-/* Адаптивность */
-@media (max-width: 1250px) {
-    .main-matrix-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .cell-wide {
-        grid-column: span 2;
-    }
+/* ==========================================================================
+ 6. ИСПРАВЛЕННАЯ СИСТЕМНАЯ АДАПТИВНОСТЬ ДЛЯ ВСЕХ ЭКРАНОВ
+ ========================================================================== */
+@media (max-width: 1250px) { 
+ .main-matrix-grid { 
+   grid-template-columns: 1fr 1fr; 
+   padding: 0 10px;
+   gap: 15px;
+ } 
+ .cell-wide { grid-column: span 2; } 
 }
 
-@media (max-width: 950px) {
-    .hud-header-content {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .nav-menu {
-        width: 100%;
-        justify-content: center;
-    }
+@media (max-width: 950px) { 
+ .hud-header-content { 
+   flex-direction: column; 
+   gap: 15px; 
+   align-items: center;
+   text-align: center;
+ } 
+ .nav-menu { 
+   width: 100%; 
+   justify-content: center; 
+ } 
+ .nav-terminal-status {
+   text-align: center;
+   font-size: 0.8rem;
+   margin-top: 5px;
+ }
 }
 
-@media (max-width: 768px) {
-    .nav-menu {
-        flex-direction: column;
-        gap: 10px;
-    }
+@media (max-width: 768px) { 
+ /* Жесткий фикс отступов, чтобы сайт не прижимался к краям экрана смартфона */
+ .grid-wrapper {
+   padding: 10px 12px;
+   width: 100%;
+   overflow-x: hidden;
+ }
+ .cyber-hud-header {
+   margin: 10px 0;
+   padding: 20px 12px 15px 12px;
+   width: 100%;
+ }
+ .main-matrix-grid { 
+   grid-template-columns: 1fr; 
+   padding: 0;
+   gap: 15px;
+   width: 100%;
+ } 
+ .cell-wide { grid-column: span 1; } 
 
-    .nav-box {
-        justify-content: center;
-        width: 100%;
-    }
+ .nav-brand {
+   font-size: 1.3rem;
+   margin-bottom: 5px;
+ }
+ .hud-panel-tag {
+   font-size: 0.65rem;
+   left: 12px;
+   top: -1px;
+ }
 
-    .main-matrix-grid {
-        grid-template-columns: 1fr;
-        padding: 0;
-    }
+ /* ФИКС МЕНЮ: Кнопки теперь не вылетают, а гибко делят пространство */
+ .nav-menu { 
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Авто-сетка */
+   gap: 6px; 
+   width: 100%;
+ } 
+ .nav-box { 
+   justify-content: center; 
+   font-size: 0.75rem;
+   padding: 6px 4px; /* Уменьшили внутренние поля, чтобы текст влезал */
+   text-align: center;
+ } 
+ .nav-box .num {
+   margin-right: 2px;
+ }
+ .nav-terminal-status {
+   font-size: 0.8rem;
+   margin-top: 10px;
+   width: 100%;
+   text-align: center;
+ }
 
-    .cell-wide {
-        grid-column: span 1;
+ .sys-banner { 
+   flex-direction: column; 
+   gap: 6px; 
+   margin: 5px 0 15px 0; 
+   font-size: 0.75rem;
+   padding-bottom: 6px;
+ } 
 
-        .sys-banner {
-            flex-direction: column;
-            gap: 10px;
-            margin: 0 0 20px 0;
-        }
-    }}
+ .flat-panel {
+   padding: 20px 15px;
+   margin-bottom: 15px;
+   width: 100%;
+ }
+ .panel-tag {
+   font-size: 0.7rem;
+   left: 12px;
+   top: -1px;
+ }
+ h2 {
+   font-size: 1.3rem;
+   margin: 15px 0 8px 0;
+ }
+ h3 {
+   font-size: 1.1rem;
+ }
+
+ .matrix-avatar {
+   height: 120px;
+   margin-bottom: 15px;
+   width: 100%;
+ }
+ .avatar-label {
+   font-size: 0.75rem;
+   padding: 3px 6px;
+ }
+
+ .contact-terminal {
+   margin-top: 20px;
+   display: grid;
+   grid-template-columns: 1fr 1fr; 
+   gap: 8px;
+ }
+ .btn-flat {
+   font-size: 0.8rem;
+   padding: 8px 4px;
+   text-align: center;
+ }
+
+ .skill-info {
+   font-size: 0.85rem;
+ }
+ .progress-bar-total {
+   height: 10px;
+ }
+ .console-box, .stream-box {
+   padding: 12px 10px;
+ }
+ .stream-line {
+   font-size: 0.75rem;
+   line-height: 1.4;
+   word-wrap: break-word;
+ }
+
+ .matrix-card {
+   padding: 15px;
+ }
+ .card-top {
+   font-size: 0.8rem;
+   flex-direction: column;
+   gap: 4px;
+ }
+ .card-meta-tags {
+   font-size: 0.75rem;
+   margin: 8px 0;
+ }
+ 
+ .card-buttons {
+   flex-direction: column; 
+   gap: 8px;
+   width: 100%;
+   margin-top: 12px;
+ }
+ .action-btn {
+   font-size: 0.85rem;
+   padding: 10px 12px;
+   text-align: center;
+   width: 100% !important;
+   display: block;
+ }
+ 
+ .cyber-base-footer {
+   flex-direction: column;
+   gap: 8px;
+   text-align: center;
+   font-size: 0.8rem;
+   padding: 15px 0;
+ }
+}
+
+@media (max-width: 380px) {
+ /* Полное вертикальное меню для самых узких дисплеей */
+ .nav-menu {
+   grid-template-columns: 1fr;
+ }
+ .contact-terminal {
+   grid-template-columns: 1fr;
+ }
+ .nav-brand {
+   font-size: 1.1rem;
+ }
+}
