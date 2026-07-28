@@ -1,0 +1,43 @@
+{
+  "profile": {
+    "name": "ИВАН",
+    "version": "v2.06",
+    "declaration": "Младший фронтенд-разработчик. Изучаю технологии создания отказоустойчивых веб-интерфейсов. Специализируюсь на брутальной семантике верстки и чистом коде.",
+    "background": "Умею работать с инструментами автоматизации сборки, настраивать окружение в терминалах Linux и разворачивать проекты в Git.",
+    "telegram": "https://t.me",
+    "github": "https://github.com",
+    "node_address": "BREST_NODE_2026"
+  },
+  "skills": [
+    { "name": "HTML5_SEMANTICS", "level": 90, "type": "magenta" },
+    { "name": "CSS3_ADVANCED_GRID", "level": 85, "type": "magenta" },
+    { "name": "PURE_JS_ES6_LOGIC", "level": 65, "type": "copper" },
+    { "name": "REACT_FRAMEWORK", "level": 40, "type": "cyan" }
+  ],
+  "live_logs": [
+    "Ядро дисплея инициализировано.",
+    "Соединение с сервером gh-pages установлено.",
+    "Горизонтальные скан-линии CRT активированы.",
+    "Вывод terminal стабилизирован."
+  ],
+  "projects": [
+    {
+      "id": "DATA_PACK_01",
+      "status": "ONLINE",
+      "title": "RADICAL_CYBER_HUD",
+      "desc": "Полноэкранный сайт-визитка с кастомными HUD-рамками, цветным текстом и полным отсутствием белых шрифтов.",
+      "tags": "// CSS_GRID // CLIP_PATH // FULL_SCREEN",
+      "preview_url": "#",
+      "source_url": "#"
+    },
+    {
+      "id": "DATA_PACK_02",
+      "status": "EMPTY_SLOT",
+      "title": "RESERVED_MEM_BLOCK_02",
+      "desc": "Данный sector пуст. Система находится в режиме ожидания деплоя вашего следующего сложного скрипта.",
+      "tags": "",
+      "preview_url": null,
+      "source_url": null
+    }
+  ]
+}

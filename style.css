@@ -1,6 +1,6 @@
 /* ==========================================================================
- 1. ПАЛИТРА И БАЗОВЫЕ НАСТРОЙКИ
- ========================================================================== */
+   BLOCK 01 // СИСТЕМНОЕ ЯДРО И НАСТРОЙКИ СЕМАНТИКИ (ROOT & RESETS)
+   ========================================================================== */
 *,
 *::before,
 *::after {
@@ -12,7 +12,6 @@
     --bg-panel: #060919;
     --cyber-magenta: #e60067;
     --cyber-turquoise: #00ebd4;
-    /* Насыщенный бирюзовый */
     --cyber-copper: #c86a37;
     --cyber-green: #00ffaa;
     --text-hud: #a3b8cc;
@@ -30,6 +29,24 @@ body {
     min-height: 100vh;
 }
 
+/* Кастомный тонкий скроллбар дисплея */
+::-webkit-scrollbar {
+    width: 4px;
+    background: var(--bg-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--cyber-turquoise);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyber-magenta);
+}
+
+
+/* ==========================================================================
+   BLOCK 02 // СЛУЖЕБНЫЕ ЦВЕТОВЫЕ СТИЛИ ТЕКСТА (FONTS & UTILITIES)
+   ========================================================================== */
 .magenta-txt {
     color: var(--cyber-magenta) !important;
 }
@@ -50,23 +67,19 @@ body {
     color: var(--text-muted) !important;
 }
 
-/* Кастомный тонкий скроллбар дисплея */
-::-webkit-scrollbar {
-    width: 4px;
-    background: var(--bg-black);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--cyber-turquoise);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--cyber-magenta);
-}
 
 /* ==========================================================================
- 2. ФОНОВАЯ СЕТКА ДИСПЛЕЯ
- ========================================================================== */
+   BLOCK 03 // ГЛОБАЛЬНЫЙ ИНТЕРФЕЙС И ФОН (LAYOUT & GRID BACKGROUND)
+   ========================================================================== */
+.grid-wrapper {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 30px);
+    display: flex;
+    flex-direction: column;
+}
+
 .global-hud-grid {
     position: fixed;
     top: 0;
@@ -91,20 +104,13 @@ body {
     }
 }
 
-.matrix-avatar,
-.matrix-card.empty-card {
-    position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5) 50%, transparent 50%) !important;
-    background-size: 100% 4px !important;
-}
 
 /* ==========================================================================
- 3. HUD-ХЕДЕР (СПЛОШНОЙ И ТОНКИЙ)
- ========================================================================== */
+   BLOCK 04 // НАВИГАЦИОННЫЙ HUD-ХЕДЕР (NAVIGATION PANEL)
+   ========================================================================== */
 .cyber-hud-header {
     background-color: var(--bg-panel);
     border: 1px solid var(--cyber-magenta);
-    /* Одна ультратонкая сплошная рамка */
     padding: 25px 20px 20px 20px;
     margin: 15px;
     position: relative;
@@ -135,14 +141,22 @@ body {
     text-shadow: 2px 2px 0px #000;
 }
 
-
-
 .nav-menu {
     display: flex;
     gap: 10px;
 }
 
-/* КНОПКИ НАВИГАЦИИ */
+.nav-terminal-status {
+    font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   BLOCK 05 // ИНТЕРАКТИВНЫЕ КНОПКИ МЕНЮ (NAV BOXES)
+   ========================================================================== */
+/* ==========================================================================
+   BLOCK 05 // ИНТЕРАКТИВНЫЕ КНОПКИ МЕНЮ (NAV BOXES - ВОЗВРАТ К ОРИГИНАЛУ)
+   ========================================================================== */
 .nav-box {
     display: flex;
     align-items: center;
@@ -177,22 +191,11 @@ body {
     color: #000 !important;
 }
 
-.nav-terminal-status {
-    font-size: 0.9rem;
-}
+
 
 /* ==========================================================================
- 4. ПОЛНОЭКРАННАЯ СЕТКА И ОКНА РАБОЧЕЙ ОБЛАСТИ
- ========================================================================== */
-.grid-wrapper {
-    width: 100%;
-    padding: 15px;
-    box-sizing: border-box;
-    min-height: calc(100vh - 30px);
-    display: flex;
-    flex-direction: column;
-}
-
+   BLOCK 06 // ИНФОРМАЦИОННЫЙ БАННЕР (SYSTEM BANNER)
+   ========================================================================== */
 .sys-banner {
     display: flex;
     justify-content: space-between;
@@ -202,6 +205,10 @@ body {
     padding-bottom: 8px;
 }
 
+
+/* ==========================================================================
+   BLOCK 07 // РАБОЧАЯ СЕТКА И БАЗОВЫЕ ОКНА (MAIN GRID - ВОЗВРАТ К ОРИГИНАЛУ)
+   ========================================================================== */
 .main-matrix-grid {
     display: grid;
     grid-template-columns: 340px 380px 1fr;
@@ -216,7 +223,6 @@ body {
     height: 100%;
 }
 
-/* БАЗОВЫЙ КЛАСС ДЛЯ ВСЕХ ОКОН (АВТО-ВЫСОТА И ЖЕСТКАЯ ИЗОЛЯЦИЯ) */
 .flat-panel {
     background-color: var(--bg-panel);
     border: 1px solid var(--text-muted);
@@ -225,7 +231,6 @@ body {
     margin-bottom: 20px;
     flex-grow: 1;
     height: auto !important;
-    /* Убираем любые фиксы высоты для безопасности адаптива */
     display: flex;
     flex-direction: column;
     animation: panelInit 0.6s cubic-bezier(0.19, 1, 0.22, 1) both;
@@ -233,46 +238,23 @@ body {
 }
 
 @keyframes panelInit {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-/* ЦВЕТОВЫЕ СТРУКТУРНЫЕ МОДИФИКАТОРЫ */
-.border-magenta {
-    border-color: var(--cyber-magenta);
-}
+/* Рамочные модификаторы окон */
+.border-magenta { border-color: var(--cyber-magenta); }
+.border-cyan    { border-color: var(--cyber-turquoise); }
+.border-copper  { border-color: var(--cyber-copper); }
 
-.border-magenta:hover {
-    box-shadow: 0 0 10px rgba(230, 0, 103, 0.15);
-}
+.border-magenta:hover { box-shadow: 0 0 10px rgba(230, 0, 103, 0.15); }
+.border-cyan:hover    { box-shadow: 0 0 10px rgba(0, 235, 212, 0.15); }
+.border-copper:hover  { box-shadow: 0 0 10px rgba(200, 106, 55, 0.15); }
 
-.border-cyan {
-    border-color: var(--cyber-turquoise);
-}
-
-.border-cyan:hover {
-    box-shadow: 0 0 10px rgba(0, 235, 212, 0.15);
-}
-
-.border-copper {
-    border-color: var(--cyber-copper);
-}
-
-.border-copper:hover {
-    box-shadow: 0 0 10px rgba(200, 106, 55, 0.15);
-}
-
+/* Ярлыки тегов на окнах */
 .panel-tag {
     position: absolute;
-    top: -1px;
-    left: 15px;
+    top: -1px; left: 15px;
     font-size: 0.8rem;
     padding: 1px 10px;
     color: #000;
@@ -280,19 +262,15 @@ body {
     z-index: 2;
 }
 
-.tag-magenta {
-    background-color: var(--cyber-magenta);
-}
+.tag-magenta { background-color: var(--cyber-magenta); }
+.tag-cyan    { background-color: var(--cyber-turquoise); }
+.tag-copper  { background-color: var(--cyber-copper); }
 
-.tag-cyan {
-    background-color: var(--cyber-turquoise);
-}
 
-.tag-copper {
-    background-color: var(--cyber-copper);
-}
 
-/* Аватар-Сканер */
+/* ==========================================================================
+   BLOCK 08 // АВАТАР-СКАНЕР И КНОПКИ СВЯЗИ (AVATAR & CONTACTS)
+   ========================================================================== */
 .matrix-avatar {
     width: 100%;
     height: 160px;
@@ -304,6 +282,8 @@ body {
     align-items: center;
     overflow: hidden;
     margin-bottom: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5) 50%, transparent 50%) !important;
+    background-size: 100% 4px !important;
 }
 
 .avatar-lines {
@@ -349,7 +329,6 @@ body {
     gap: 10px;
 }
 
-/* КНОПКИ-ССЫЛКИ */
 .btn-flat {
     text-decoration: none;
     font-weight: bold;
@@ -366,14 +345,14 @@ body {
     color: var(--cyber-magenta);
 }
 
-.btn-flat.text-magenta:hover {
-    background: var(--cyber-magenta);
-    color: #000 !important;
-}
-
 .btn-flat.text-cyan {
     border-color: var(--cyber-turquoise);
     color: var(--cyber-turquoise);
+}
+
+.btn-flat.text-magenta:hover {
+    background: var(--cyber-magenta);
+    color: #000 !important;
 }
 
 .btn-flat.text-cyan:hover {
@@ -381,9 +360,33 @@ body {
     color: #000 !important;
 }
 
+
 /* ==========================================================================
- 5. ШКАЛЫ ПРОГРЕССА И КАРТОЧКИ ПОРТФОЛИО
- ========================================================================== */
+   BLOCK 09 // КОНСОЛЬ, ЛОГИ И ШКАЛЫ ПРОГРЕССА (TERMINALS & SKILLS)
+   ========================================================================== */
+.console-box,
+.stream-box {
+    background-color: #000 !important;
+    padding: 15px;
+    border: 1px solid var(--cyber-copper);
+}
+
+.stream-box {
+    border-color: var(--cyber-turquoise);
+    min-height: 200px;
+}
+
+.console-input {
+    margin: 0 0 15px 0;
+}
+
+.stream-line {
+    margin: 8px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px dashed rgba(51, 65, 85, 0.4);
+    padding-bottom: 6px;
+}
+
 .skill-progress-wrapper {
     margin-bottom: 15px;
 }
@@ -420,31 +423,10 @@ body {
     background-color: var(--cyber-turquoise);
 }
 
-/* Терминальные контейнеры */
-.console-box,
-.stream-box {
-    background-color: #000 !important;
-    padding: 15px;
-    border: 1px solid var(--cyber-copper);
-}
 
-.stream-box {
-    border-color: var(--cyber-turquoise);
-    min-height: 200px;
-}
-
-.console-input {
-    margin: 0 0 15px 0;
-}
-
-.stream-line {
-    margin: 8px 0;
-    font-size: 0.85rem;
-    border-bottom: 1px dashed rgba(51, 65, 85, 0.4);
-    padding-bottom: 6px;
-}
-
-/* Контейнер репозиториев */
+/* ==========================================================================
+   BLOCK 10 // КАРТОЧКИ ПОРТФОЛИО И КНОПКИ ДЕЙСТВИЙ (PORTFOLIO BIN)
+   ========================================================================== */
 .portfolio-container {
     display: flex;
     flex-direction: column;
@@ -452,7 +434,6 @@ body {
     height: auto !important;
 }
 
-/* КАРТОЧКА ПОРТФОЛИО С ФИКСОМ ВЫСОТЫ */
 .matrix-card {
     border: 1px solid var(--text-muted);
     background-color: var(--bg-panel);
@@ -461,7 +442,6 @@ body {
     display: flex;
     flex-direction: column;
     height: auto !important;
-    /* Автоматический расчет высоты под кнопки */
     transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -475,6 +455,9 @@ body {
     border: 1px dashed var(--text-muted);
     border-left: 4px dashed var(--text-muted);
     background-color: transparent !important;
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5) 50%, transparent 50%) !important;
+    background-size: 100% 4px !important;
 }
 
 .card-top {
@@ -501,7 +484,6 @@ body {
     width: 100%;
 }
 
-/* ТАКТИЧЕСКИЕ КНОПКИ */
 .action-btn {
     display: inline-block;
     padding: 12px 24px;
@@ -538,6 +520,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* ==========================================================================BLOCK 11 // ФУТЕР СИСТЕМЫ (BASE FOOTER)========================================================================== */
 .cyber-base-footer {
     display: flex;
     justify-content: space-between;
@@ -546,237 +529,375 @@ body {
     padding: 20px 0;
     font-size: 1rem;
 }
-/* ==========================================================================
- 6. ИСПРАВЛЕННАЯ СИСТЕМНАЯ АДАПТИВНОСТЬ ДЛЯ ВСЕХ ЭКРАНОВ
- ========================================================================== */
-@media (max-width: 1250px) { 
- .main-matrix-grid { 
-   grid-template-columns: 1fr 1fr; 
-   padding: 0 10px;
-   gap: 15px;
- } 
- .cell-wide { grid-column: span 2; } 
-}
 
-@media (max-width: 950px) { 
- .hud-header-content { 
-   flex-direction: column; 
-   gap: 15px; 
-   align-items: center;
-   text-align: center;
- } 
- .nav-menu { 
-   width: 100%; 
-   justify-content: center; 
- } 
- .nav-terminal-status {
-   text-align: center;
-   font-size: 0.8rem;
-   margin-top: 5px;
- }
-}
-
-@media (max-width: 768px) { 
- /* Жесткий фикс отступов, чтобы сайт не прижимался к краям экрана смартфона */
- .grid-wrapper {
-   padding: 10px 12px;
-   width: 100%;
-   overflow-x: hidden;
- }
- .cyber-hud-header {
-   margin: 10px 0;
-   padding: 20px 12px 15px 12px;
-   width: 100%;
- }
- .main-matrix-grid { 
-   grid-template-columns: 1fr; 
-   padding: 0;
-   gap: 15px;
-   width: 100%;
- } 
- .cell-wide { grid-column: span 1; } 
-
- .nav-brand {
-   font-size: 1.3rem;
-   margin-bottom: 5px;
- }
- .hud-panel-tag {
-   font-size: 0.65rem;
-   left: 12px;
-   top: -1px;
- }
-
- /* ФИКС МЕНЮ: Кнопки теперь не вылетают, а гибко делят пространство */
- .nav-menu { 
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Авто-сетка */
-   gap: 6px; 
-   width: 100%;
- } 
- .nav-box { 
-   justify-content: center; 
-   font-size: 0.75rem;
-   padding: 6px 4px; /* Уменьшили внутренние поля, чтобы текст влезал */
-   text-align: center;
- } 
- .nav-box .num {
-   margin-right: 2px;
- }
- .nav-terminal-status {
-   font-size: 0.8rem;
-   margin-top: 10px;
-   width: 100%;
-   text-align: center;
- }
-
- .sys-banner { 
-   flex-direction: column; 
-   gap: 6px; 
-   margin: 5px 0 15px 0; 
-   font-size: 0.75rem;
-   padding-bottom: 6px;
- } 
-
- .flat-panel {
-   padding: 20px 15px;
-   margin-bottom: 15px;
-   width: 100%;
- }
- .panel-tag {
-   font-size: 0.7rem;
-   left: 12px;
-   top: -1px;
- }
- h2 {
-   font-size: 1.3rem;
-   margin: 15px 0 8px 0;
- }
- h3 {
-   font-size: 1.1rem;
- }
-
- .matrix-avatar {
-   height: 120px;
-   margin-bottom: 15px;
-   width: 100%;
- }
- .avatar-label {
-   font-size: 0.75rem;
-   padding: 3px 6px;
- }
-
- .contact-terminal {
-   margin-top: 20px;
-   display: grid;
-   grid-template-columns: 1fr 1fr; 
-   gap: 8px;
- }
- .btn-flat {
-   font-size: 0.8rem;
-   padding: 8px 4px;
-   text-align: center;
- }
-
- .skill-info {
-   font-size: 0.85rem;
- }
- .progress-bar-total {
-   height: 10px;
- }
- .console-box, .stream-box {
-   padding: 12px 10px;
- }
- .stream-line {
-   font-size: 0.75rem;
-   line-height: 1.4;
-   word-wrap: break-word;
- }
-
- .matrix-card {
-   padding: 15px;
- }
- .card-top {
-   font-size: 0.8rem;
-   flex-direction: column;
-   gap: 4px;
- }
- .card-meta-tags {
-   font-size: 0.75rem;
-   margin: 8px 0;
- }
- 
- .card-buttons {
-   flex-direction: column; 
-   gap: 8px;
-   width: 100%;
-   margin-top: 12px;
- }
- .action-btn {
-   font-size: 0.85rem;
-   padding: 10px 12px;
-   text-align: center;
-   width: 100% !important;
-   display: block;
- }
- 
- .cyber-base-footer {
-   flex-direction: column;
-   gap: 8px;
-   text-align: center;
-   font-size: 0.8rem;
-   padding: 15px 0;
- }
-}
-
-@media (max-width: 380px) {
- /* Полное вертикальное меню для самых узких дисплеей */
- .nav-menu {
-   grid-template-columns: 1fr;
- }
- .contact-terminal {
-   grid-template-columns: 1fr;
- }
- .nav-brand {
-   font-size: 1.1rem;
- }
-}
-
-/* ==========================================================================
-   7. СИСТЕМНЫЙ АНАГЛИФНЫЙ ГЛИТЧ (СТРОГО НА 0.2 СЕКУНДЫ)
-   ========================================================================== */
-
-/* Изменено: Убраны все псевдоклассы :hover. Стили применяются только через класс */
+/* ==========================================================================BLOCK 12 // СИСТЕМНЫЕ ЭФФЕКТЫ JS (DYNAMIC CLASSES)========================================================================== */
 .glitch-active {
-    
     animation: cyber-shake-horizontal 0.2s cubic-bezier(.25, .46, .45, .94) 1;
     text-shadow: -2px 0 0 var(--cyber-magenta), 2px 0 0 var(--cyber-turquoise);
     position: relative;
 }
 
-/* Эффект жесткого горизонтального подёргивания (только влево-вправо) */
 @keyframes cyber-shake-horizontal {
     0% {
         transform: translateX(0);
         text-shadow: -2px 0 0 var(--cyber-magenta), 2px 0 0 var(--cyber-turquoise);
     }
+
     20% {
         transform: translateX(-3px);
         text-shadow: -4px 0 0 var(--cyber-magenta), 1px 0 0 var(--cyber-turquoise);
     }
+
     40% {
         transform: translateX(2px);
         text-shadow: 3px 0 0 var(--cyber-magenta), -2px 0 0 var(--cyber-turquoise);
     }
+
     60% {
         transform: translateX(-2px);
         text-shadow: -1px 0 0 var(--cyber-magenta), 4px 0 0 var(--cyber-turquoise);
     }
+
     80% {
         transform: translateX(3px);
         text-shadow: 4px 0 0 var(--cyber-magenta), -3px 0 0 var(--cyber-turquoise);
     }
+
     100% {
         transform: translateX(0);
-        text-shadow: 0 0 0 transparent; /* Тени полностью исчезают */
+        text-shadow: 0 0 0 transparent;
     }
+}
+
+/* ==========================================================================BLOCK 13 // АДАПТИВНОСТЬ И ФИКСЫ ЭКРАНОВ (RESPONSIVE MEDIA QUERIES)========================================================================== */
+@media (max-width: 1250px) {
+    .main-matrix-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 10px;
+        gap: 15px;
+    }
+
+    .cell-wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 950px) {
+    .hud-header-content {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-menu {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-terminal-status {
+        text-align: center;
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-wrapper {
+        padding: 10px 12px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .cyber-hud-header {
+        margin: 10px 0;
+        padding: 20px 12px 15px 12px;
+        width: 100%;
+    }
+
+    .main-matrix-grid {
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .cell-wide {
+        grid-column: span 1;
+    }
+
+    .nav-brand {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+
+    .hud-panel-tag {
+        font-size: 0.65rem;
+        left: 12px;
+        top: -1px;
+    }
+
+    .nav-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 6px;
+        width: 100%;
+    }
+
+    .nav-box {
+        display: flex;
+        align-items: center;
+        padding: 8px 20px;
+        text-decoration: none;
+        background-color: #020308;
+        font-size: 1rem;
+        color: var(--cyber-copper);
+        font-weight: bold;
+        transition: transform 0.1s ease, background-color 0.2s ease;
+
+        /* Полигон для обрезки */
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+        position: relative;
+    }
+
+    /* ГЕНЕРАЦИЯ КАСТУМНОЙ РАМКИ ДЛЯ НАВ-БОКСА ЧЕРЕЗ МАСКУ */
+    .nav-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--cyber-copper);
+        /* Цвет рамки по умолчанию */
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        padding: 1px;
+        /* Толщина рамки в 1 пиксель */
+        pointer-events: none;
+        transition: background 0.2s ease;
+    }
+
+    /* При ховере меняем цвет кастомной рамки на бирюзовый */
+    .nav-box:hover::before,
+    .nav-box.active::before {
+        background: var(--cyber-turquoise);
+    }
+
+
+
+    .nav-box .num {
+        margin-right: 2px;
+    }
+
+    .nav-terminal-status {
+        font-size: 0.8rem;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .sys-banner {
+        flex-direction: column;
+        gap: 6px;
+        margin: 5px 0 15px 0;
+        font-size: 0.75rem;
+        padding-bottom: 6px;
+    }
+
+    .flat-panel {
+        padding: 20px 15px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .panel-tag {
+        font-size: 0.7rem;
+        left: 12px;
+        top: -1px;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        margin: 15px 0 8px 0;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    .matrix-avatar {
+        height: 120px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .avatar-label {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
+
+    .contact-terminal {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    .btn-flat {
+        font-size: 0.8rem;
+        padding: 8px 4px;
+        text-align: center;
+    }
+
+    .skill-info {
+        font-size: 0.85rem;
+    }
+
+    .progress-bar-total {
+        height: 10px;
+    }
+
+    .console-box,
+    .stream-box {
+        padding: 12px 10px;
+    }
+
+    .stream-line {
+        font-size: 0.75rem;
+        line-height: 1.4;
+        word-wrap: break-word;
+    }
+
+    .matrix-card {
+        padding: 15px;
+    }
+
+    .card-top {
+        font-size: 0.8rem;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .card-meta-tags {
+        font-size: 0.75rem;
+        margin: 8px 0;
+    }
+
+    .card-buttons {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .action-btn {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+        text-align: center;
+        width: 100% !important;
+        display: block;
+    }
+
+    .cyber-base-footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        font-size: 0.8rem;
+        padding: 15px 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-terminal {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-brand {
+        font-size: 1.1rem;
+    }
+}
+
+/* ==========================================================================
+   BLOCK 14 // СИСТЕМНЫЙ ЭКРАН ЗАГРУЗКИ (CRT LOADER)
+   ========================================================================== */
+#cyber-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-black);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s steps(4);
+}
+
+.loader-content {
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 25px 20px;
+    border: 1px solid var(--cyber-magenta);
+    /* Изменено: малиновая рамка */
+    background: var(--bg-panel);
+}
+
+.loader-brand {
+    color: #fff;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    /* Изменено: бесконечная анимация убрана, класс готов к импульсам через JS */
+}
+
+
+.loader-bar-wrapper {
+    width: 100%;
+    height: 16px;
+    background-color: #020306;
+    border: 1px solid rgba(0, 235, 212, 0.3);
+    /* Бирюзовая мини-рамка шторки */
+    padding: 2px;
+}
+
+.loader-bar-fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--cyber-turquoise);
+    /* Изменено: бирюзовый цвет шкалы */
+    transition: width 0.05s linear;
+}
+
+.loader-status {
+    color: var(--text-hud);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    min-height: 1.2rem;
+    /* Фиксированная высота, чтобы текст не прыгал при дешифровке */
+}
+
+/* Внедрено: Выводим сетку внутри лоадера на передний план относительно черного фона */
+#cyber-loader .global-hud-grid {
+    z-index: 1;
+    /* Поднимаем выше фона лоадера, но ниже самого окна с полосой */
+}
+
+#cyber-loader .loader-content {
+    z-index: 2;
+    /* Окно загрузки гарантированно поверх сетки */
 }
