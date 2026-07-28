@@ -135,10 +135,7 @@ body {
     text-shadow: 2px 2px 0px #000;
 }
 
-.nav-brand:hover {
-    color: #fff;
-    text-shadow: 2px -2px 0 var(--cyber-magenta), -2px 2px 0 var(--cyber-turquoise);
-}
+
 
 .nav-menu {
     display: flex;
@@ -742,4 +739,44 @@ body {
  .nav-brand {
    font-size: 1.1rem;
  }
+}
+
+/* ==========================================================================
+   7. СИСТЕМНЫЙ АНАГЛИФНЫЙ ГЛИТЧ (СТРОГО НА 0.2 СЕКУНДЫ)
+   ========================================================================== */
+
+/* Изменено: Убраны все псевдоклассы :hover. Стили применяются только через класс */
+.glitch-active {
+    
+    animation: cyber-shake-horizontal 0.2s cubic-bezier(.25, .46, .45, .94) 1;
+    text-shadow: -2px 0 0 var(--cyber-magenta), 2px 0 0 var(--cyber-turquoise);
+    position: relative;
+}
+
+/* Эффект жесткого горизонтального подёргивания (только влево-вправо) */
+@keyframes cyber-shake-horizontal {
+    0% {
+        transform: translateX(0);
+        text-shadow: -2px 0 0 var(--cyber-magenta), 2px 0 0 var(--cyber-turquoise);
+    }
+    20% {
+        transform: translateX(-3px);
+        text-shadow: -4px 0 0 var(--cyber-magenta), 1px 0 0 var(--cyber-turquoise);
+    }
+    40% {
+        transform: translateX(2px);
+        text-shadow: 3px 0 0 var(--cyber-magenta), -2px 0 0 var(--cyber-turquoise);
+    }
+    60% {
+        transform: translateX(-2px);
+        text-shadow: -1px 0 0 var(--cyber-magenta), 4px 0 0 var(--cyber-turquoise);
+    }
+    80% {
+        transform: translateX(3px);
+        text-shadow: 4px 0 0 var(--cyber-magenta), -3px 0 0 var(--cyber-turquoise);
+    }
+    100% {
+        transform: translateX(0);
+        text-shadow: 0 0 0 transparent; /* Тени полностью исчезают */
+    }
 }

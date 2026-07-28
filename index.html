@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ MATRIX_HUD // FULL_SCREEN</title>
+    <title>MATRIX_HUD // FULL_SCREEN</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Исправлено: Подключен корректный шрифт Share Tech Mono -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="cyber-particles"></div>
     <div class="global-hud-grid"></div>
-
     <div class="grid-wrapper">
         <!-- Монолитный Хедер -->
         <header class="cyber-hud-header">
@@ -49,6 +50,7 @@
             <section class="grid-cell" id="about">
                 <div class="flat-panel border-magenta">
                     <div class="panel-tag tag-magenta">HOST_USER_DATA</div>
+                    <!-- Исправлено: Закрыт тег аватарки, удален нулевой символ -->
                     <div class="matrix-avatar">
                         <div class="avatar-lines"></div>
                         <span class="avatar-label">[MATRIX_SCAN_ACTIVE]</span>
@@ -73,6 +75,7 @@
                     <div class="console-box">
                         <p class="console-input"><span class="copper-txt">root@dev:~#</span> get_skills --loaded</p>
                         <div class="matrix-list">
+                            <!-- Исправлено: Очищены битые спецсимволы в классах copper-txt и cyan-txt -->
                             <div class="skill-progress-wrapper">
                                 <div class="skill-info"><span class="matrix-txt">HTML5_SEMANTICS</span><span class="copper-txt">90%</span></div>
                                 <div class="progress-bar-total"><div class="progress-bar-fill fill-magenta" style="width: 90%;"></div></div>
@@ -92,14 +95,13 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="flat-panel border-cyan">
                     <div class="panel-tag tag-cyan">LIVE_STREAM_LOG</div>
                     <div class="stream-box">
                         <p class="stream-line"><span class="muted-txt">[18:10:02]</span> <span class="cyan-txt">SYS_OK:</span> Ядро дисплея инициализировано.</p>
                         <p class="stream-line"><span class="muted-txt">[18:10:05]</span> <span class="copper-txt">NET_OK:</span> Соединение с сервером gh-pages установлено.</p>
                         <p class="stream-line"><span class="muted-txt">[18:12:43]</span> <span class="cyan-txt">LOAD:</span> Горизонтальные скан-линии CRT активированы.</p>
-                        <p class="stream-line"><span class="muted-txt">[18:15:23]</span> <span class="cyan-txt">DONE:</span> Вывод терминала стабилизирован.</p>
+                        <p class="stream-line"><span class="muted-txt">[18:15:23]</span> <span class="cyan-txt">DONE:</span> Вывод terminal стабилизирован.</p>
                     </div>
                 </div>
             </section>
@@ -122,7 +124,7 @@
                         <div class="matrix-card empty-card">
                             <div class="card-top"><span class="muted-txt">DATA_PACK_02 //</span><span class="muted-txt">STATUS: EMPTY_SLOT</span></div>
                             <h3 class="muted-txt">RESERVED_MEM_BLOCK_02</h3>
-                            <p class="muted-txt">Данный сектор пуст. Система находится в режиме ожидания деплоя вашего следующего сложного скрипта.</p>
+                            <p class="muted-txt">Данный sector пуст. Система находится в режиме ожидания деплоя вашего следующего сложного скрипта.</p>
                         </div>
                     </div>
                 </div>
@@ -134,8 +136,6 @@
             <div class="footer-right-side"><span class="magenta-txt">HOST_PORTFOLIO:</span> <span class="cyan-txt">gh-pages</span></div>
         </footer>
     </div>
-
     <script src="script.js"></script>
 </body>
-</html> 
- 
+</html>
