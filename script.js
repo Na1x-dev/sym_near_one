@@ -2,8 +2,11 @@ import { renderSystemData } from './render.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   // 1. АСИНХРОННАЯ ИНИЦИАЛИЗАЦИЯ И ПОЛУЧЕНИЕ ДАННЫХ
-  fetch('config.json')
-    .then(response => response.json())
+  fetch('./config.json')
+    .then(response => {
+      if (!response.ok) throw new Error(`config.json вернул HTTP ${response.status}`);
+      return response.json();
+    })
     .then(data => {
       // Вызываем внешний рендеринг из render.js
       renderSystemData(data);
@@ -12,7 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => {
       console.error("Ошибка загрузки системного конфига:", err);
-      document.getElementById('cyber-loader').style.display = 'none';
+      const loader = document.getElementById('cyber-loader');
+      const status = loader?.querySelector('.loader-status');
+      if (status) status.innerText = "CONFIG_LOAD_FAILED // RUN VIA LOCAL SERVER";
+      // Не оставляем пользователя с бесконечной загрузкой, если конфиг недоступен.
+      window.setTimeout(() => {
+        if (loader) {
+          loader.style.opacity = '0';
+          window.setTimeout(() => { loader.style.display = 'none'; }, 400);
+        }
+      }, 1800);
     });
 
   // 2. ИМИТАЦИЯ СИСТЕМНОГО CRT ЛОАДЕРА (ГЛИТЧ-ВЕРСИЯ)
@@ -155,8 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 5. ЗВУКИ (Web Audio API)
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = AudioContextClass ? new AudioContextClass() : null;
   function playBeep(frequency, duration, type = "sine", volume = 0.05) {
+    if (!audioCtx) return;
     if (audioCtx.state === 'suspended') audioCtx.resume();
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
