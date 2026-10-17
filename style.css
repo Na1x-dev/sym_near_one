@@ -1245,3 +1245,25 @@ a:focus-visible {
     .nav-box { justify-content: flex-start; }
     .contact-terminal { grid-template-columns: 1fr; }
 }
+
+
+/* NIGHT CITY PALETTE PASS: replace the remaining yellow with red/pink */
+:root {
+    --cyber-magenta: #ff3b72;
+    --cyber-turquoise: #00e5ff;
+    --line-soft: rgba(220, 226, 235, .13);
+}
+.flat-panel:hover { border-color: rgba(255, 59, 114, .42); }
+.matrix-avatar {
+    border-color: rgba(0, 229, 255, .36);
+    background:
+        linear-gradient(135deg, rgba(0,229,255,.045), transparent 55%),
+        linear-gradient(0deg, rgba(255,59,114,.045), transparent),
+        #090a0c;
+}
+.avatar-label { border-color: rgba(255,59,114,.55); }
+.matrix-card:hover { border-color: rgba(255,59,114,.5); }
+.block-magenta:hover { background: #ff789d; border-color: #ff789d; }
+.loader-content { border-color: rgba(255,59,114,.62); }
+.loader-bar-wrapper { border-color: rgba(0,229,255,.28); }
+.nav-box:hover, .nav-box.active { box-shadow: 4px 4px 0 rgba(255,59,114,.18); }
