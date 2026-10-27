@@ -1,46 +1,133 @@
-body{
-    background-color: darkslateblue;
-    margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-    display: flex;
-    flex-direction: column;
+:root {
+  --text-color: #e5f0f4;
+  --accent-color: #35f2c1;
+  --background-color: #080d12;
+  --surface-color: #101a21;
+  --status-color: #8bff8a;
+  --muted-color: #a8bac5;
+
+  --font-text: "Inter", sans-serif;
+  --font-style: "JetBrains Mono", serif;
 }
 
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: black;
-    color: aliceblue;
-    height: 70px;
-    align-items: center;
-    padding: 0px 50px;
+@font-face {
+  font-family: "JetBrains Mono"; /* Имя, которое вы придумываете сами */
+  src: url("sources/fonts/JetBrainsMono-2.304/fonts/variable/JetBrainsMono[wght].ttf")
+    format("truetype"); /* Путь к файлу .ttf */
+  font-weight: 400; /* Насыщенность (400 — обычный, 700 — жирный) */
+  font-style: normal; /* Стиль (normal или italic) */
+  font-display: swap; /* Заставляет текст отображаться сразу системным шрифтом, пока грузится ваш */
 }
 
-.header-menu{
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    height: 100%;
-    align-items: center;
+body {
+  background-color: var(--background-color);
+  margin: 0;
+  font-family: var(--font-style);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-style);
 }
 
-.header-menu-item{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+  padding: 0px 20px;
 }
 
-.active-header-item{
-background-color: darkslateblue;
-
+.header-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  height: 100%;
+  align-items: center;
 }
 
-.main{
-    background-color: black;
-    margin: 10px;
-    height: 1600px;
+.header-menu-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
 }
 
+.logo {
+  color: var(--accent-color);
+  font-family: var(--font-style);
+}
 
+.language-switcher {
+  color: var(--muted-color);
+}
+
+.main {
+  background-color: var(--background-color);
+  /* margin: 10px; */
+  /* height: 1600px; */
+}
+
+.horizontal-separator {
+  background-color: var(--surface-color);
+  height: 1px;
+  margin: 0 20px;
+  width: auto;
+}
+
+.main-info {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px;
+  gap: 15px;
+}
+
+.head-info {
+  color: var(--accent-color);
+}
+
+.slogan {
+  color: var(--text-color);
+}
+
+.description {
+  color: var(--muted-color);
+}
+
+.cluster-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.general-btn {
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  border: 1px solid var(--accent-color);
+  color: var(--surface-color);
+  padding: 10px 15px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.general-btn:hover {
+  background-color: var(--background-color);
+  color: var(--accent-color);
+}
+
+.common-btn {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 10px 15px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.common-btn:hover {
+  background-color: var(--accent-color);
+
+  color: var(--surface-color);
+}
