@@ -11,12 +11,12 @@
 }
 
 @font-face {
-  font-family: "JetBrains Mono"; /* Имя, которое вы придумываете сами */
+  font-family: "JetBrains Mono";
   src: url("sources/fonts/JetBrainsMono-2.304/fonts/variable/JetBrainsMono[wght].ttf")
-    format("truetype"); /* Путь к файлу .ttf */
-  font-weight: 400; /* Насыщенность (400 — обычный, 700 — жирный) */
-  font-style: normal; /* Стиль (normal или italic) */
-  font-display: swap; /* Заставляет текст отображаться сразу системным шрифтом, пока грузится ваш */
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
@@ -25,87 +25,73 @@ body {
   font-family: var(--font-style);
   display: flex;
   flex-direction: column;
-  font-family: var(--font-style);
 }
 
-.header {
+.site-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 70px;
   align-items: center;
-  padding: 0px 20px;
-}
-
-.header-menu {
-  display: flex;
-  flex-direction: row;
-  gap: 50px;
-  height: 100%;
-  align-items: center;
-}
-
-.header-menu-item {
-  height: 100%;
-  display: flex;
-  align-items: center;
   padding: 0 20px;
 }
 
-.logo {
+.site-header__brand {
   color: var(--accent-color);
   font-family: var(--font-style);
+  text-decoration: none;
 }
 
-.language-switcher {
+.site-header__language-switcher {
   color: var(--muted-color);
 }
 
-.main {
+.page-main {
   background-color: var(--background-color);
-  /* margin: 10px; */
-  /* height: 1600px; */
 }
 
-.horizontal-separator {
+.section-divider {
   background-color: var(--surface-color);
   height: 1px;
   margin: 0 20px;
   width: auto;
 }
 
-.main-info {
+.hero {
   display: flex;
 }
 
-.main-info-info {
+.hero__content {
   display: flex;
   flex-direction: column;
-  margin: 20px 20px;
+  margin: 20px;
   gap: 15px;
   width: 50%;
 }
 
-.head-info {
+.hero__eyebrow {
   color: var(--accent-color);
 }
 
-.slogan {
+.hero__title {
   color: var(--text-color);
+  margin: 0;
 }
 
-.description {
+.hero__description {
   color: var(--muted-color);
+  margin: 0;
 }
 
-.cluster-btns {
+.hero__actions {
   display: flex;
   flex-direction: row;
   gap: 15px;
   margin-top: 20px;
 }
 
-.general-btn {
+.button {
+  display: inline-block;
   background-color: var(--accent-color);
   border-radius: 10px;
   border: 1px solid var(--accent-color);
@@ -116,28 +102,22 @@ body {
   text-decoration: none;
 }
 
-.general-btn:hover {
+.button--primary:hover {
   background-color: var(--background-color);
   color: var(--accent-color);
 }
 
-.common-btn {
+.button--secondary {
   background-color: var(--background-color);
-  border-radius: 10px;
-  border: 1px solid var(--accent-color);
   color: var(--accent-color);
-  padding: 10px 15px;
-  transition-duration: 0.2s;
-  cursor: pointer;
 }
 
-.common-btn:hover {
+.button--secondary:hover {
   background-color: var(--accent-color);
-
   color: var(--surface-color);
 }
 
-.main-info-console-field {
+.hero__visual {
   width: 50%;
   height: 100%;
 }
@@ -154,15 +134,13 @@ body {
   justify-content: end;
 }
 
-.terminal-window span {
-  color: var(--surface-color);
-  margin: 10px 10px;
-}
-
-.terminal-field {
+.terminal-window__content {
   background-color: var(--surface-color);
   width: 100%;
   height: 92%;
   border-radius: 10px;
   margin-top: 15px;
+}
+
+.projects-preview {
 }
