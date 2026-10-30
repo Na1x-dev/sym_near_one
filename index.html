@@ -3,21 +3,32 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080d12"><meta name="description" content="Andrew — full-stack developer building web applications.">
 <title>Andrew | Full-stack developer</title><link rel="stylesheet" href="style.css">
-<script src="projects-data.js" defer></script><script src="components.js" defer></script><script src="script.js" defer></script>
+<script src="projects-data.js" defer></script><script src="script.js" defer></script>
 </head><body>
-<div data-site-header></div><main class="page-main">
+<header class="site-header">
+  <a class="site-header__brand" href="index.html">[sym_near_one.run]</a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="index.html" aria-current="page" data-en="Home" data-ru="Главная">Home</a>
+    <a href="projects.html" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="https://github.com/Na1x-dev" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </nav>
+  <button class="language-toggle" type="button" data-language-toggle aria-label="Switch language">RU</button>
+</header>
+<main class="page-main">
 <div class="section-divider" aria-hidden="true"></div>
 <section class="hero"><div class="hero__content">
-<p class="hero__eyebrow">FULL-STACK DEVELOPER / PORTFOLIO</p>
-<h1 class="hero__title"><span class="hero__title-author">SymNearOne: </span>Hi, I'm Andrew — I build web applications with React and Django REST Framework<span class="hero__cursor">_</span></h1>
-<p class="hero__description">I enjoy turning ideas into functional, thoughtful, and user-friendly products.</p>
-<div class="hero__actions"><a href="projects.html" class="button button--primary">Explore projects ↘</a><a href="https://github.com/Na1x-dev" class="button button--secondary" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+<p class="hero__eyebrow" data-en="FULL-STACK DEVELOPER / PORTFOLIO" data-ru="FULL-STACK РАЗРАБОТЧИК / ПОРТФОЛИО">FULL-STACK DEVELOPER / PORTFOLIO</p>
+<h1 class="hero__title"><span class="hero__title-author">SymNearOne: </span><span data-en="Hi, I'm Andrew — I build web applications with React and Django REST Framework" data-ru="Привет, я Эндрю — разрабатываю веб-приложения на React и Django REST Framework">Hi, I'm Andrew — I build web applications with React and Django REST Framework</span><span class="hero__cursor">_</span></h1>
+<p class="hero__description" data-en="I enjoy turning ideas into functional, thoughtful, and user-friendly products." data-ru="Мне нравится превращать идеи в функциональные, продуманные и удобные продукты.">I enjoy turning ideas into functional, thoughtful, and user-friendly products.</p>
+<div class="hero__actions"><a href="projects.html" class="button button--primary" data-en="Explore projects ↘" data-ru="Посмотреть проекты ↘">Explore projects ↘</a><a href="https://github.com/Na1x-dev" class="button button--secondary" target="_blank" rel="noreferrer">GitHub ↗</a></div>
 </div><div class="hero__visual"><div class="terminal-window">
-<div class="terminal-window__bar"><div class="terminal-window__dots" aria-hidden="true"><span></span><span></span><span></span></div><span>andrew@portfolio: ~</span><span class="terminal-window__bar-status">interactive bash</span></div>
-<div class="terminal-window__content" id="terminal-output" role="log" aria-live="polite"><p class="terminal-output">Welcome to my portfolio terminal. Type help to see available commands.</p></div>
+<div class="terminal-window__bar"><div class="terminal-window__dots" aria-hidden="true"><span></span><span></span><span></span></div><span>andrew@portfolio: ~</span><span class="terminal-window__bar-status">interactive terminal</span></div>
+<div class="terminal-window__content" id="terminal-output" role="log" aria-live="polite"><p class="terminal-output" data-en="Welcome to my portfolio terminal. Type help to see available commands." data-ru="Добро пожаловать в терминал портфолио. Введите help для списка команд.">Welcome to my portfolio terminal. Type help to see available commands.</p></div>
 <form class="terminal-input" id="terminal-form" autocomplete="off"><label class="terminal-input__prompt" for="terminal-command">andrew@portfolio:~$</label><input id="terminal-command" name="command" type="text" spellcheck="false" placeholder="type help and press Enter"><button type="submit" aria-label="Run command">↵</button></form>
 </div></div></section>
 <div class="section-divider" aria-hidden="true"></div>
-<section class="about" id="projects"><p class="section-label">// SELECTED PROJECTS</p><h2 class="about__text">I've built a variety of applications and software solutions. Here are two projects I'm especially happy to share.</h2>
-<div class="projects-grid" id="featured-projects"></div><div class="section-actions"><a class="button button--secondary" href="projects.html">Browse all projects ↗</a></div></section>
-</main><div data-site-footer></div></body></html>
+<section class="about" id="projects"><p class="section-label" data-en="// SELECTED PROJECTS" data-ru="// ИЗБРАННЫЕ ПРОЕКТЫ">// SELECTED PROJECTS</p><h2 class="about__text" data-en="I've built a variety of applications and software solutions. Here are two projects I'm especially happy to share." data-ru="Я разрабатывал разные приложения и программные решения. Здесь — два проекта, которыми особенно хочу поделиться.">I've built a variety of applications and software solutions. Here are two projects I'm especially happy to share.</h2>
+<div class="projects-grid" id="featured-projects"></div><div class="section-actions"><a class="button button--secondary" href="projects.html" data-en="Browse all projects ↗" data-ru="Все проекты ↗">Browse all projects ↗</a></div></section>
+</main>
+<footer class="site-footer"><span>© <span id="current-year"></span> SymNearOne</span><span data-en="BUILT WITH CURIOSITY" data-ru="СОЗДАНО С ЛЮБОПЫТСТВОМ">BUILT WITH CURIOSITY</span><span class="footer-accent">✳</span></footer>
+</body></html>
