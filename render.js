@@ -130,4 +130,4 @@ export function renderSystemData(config) {
       </article>`);
   });
 
-}\n
+}
