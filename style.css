@@ -53,7 +53,7 @@ body {
 .section-divider {
   background-color: var(--surface-color);
   height: 1px;
-  margin: 0 20px;
+  margin: 20px 0;
   width: auto;
 }
 
@@ -64,7 +64,8 @@ body {
 .hero__content {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  justify-content: end;
+  /* margin: 20px 0; */
   gap: 15px;
   width: 50%;
 }
@@ -73,9 +74,9 @@ body {
   color: var(--accent-color);
 }
 
-.hero__title {
+.paragraph {
   color: var(--text-color);
-  margin: 0;
+  margin: 20px 0;
 }
 
 .hero__description {
@@ -140,4 +141,35 @@ body {
   height: 92%;
   border-radius: 10px;
   margin-top: 15px;
+}
+
+.hero__title__author {
+  color: var(--accent-color);
+}
+
+.after-hero__title {
+  margin: 60px 0;
+}
+
+.main-projects {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.project__card {
+  width: 50%;
+  /* height: 100px; */
+  background-color: var(--surface-color);
+  border: 3px solid var(--accent-color);
+  border-radius: 15px;
+  padding: 0px 20px;
+}
+
+.card__title {
+  color: var(--text-color);
+}
+
+.card__description {
+  color: var(--muted-color);
 }
