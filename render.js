@@ -75,9 +75,7 @@ export function renderSystemData(config) {
     const status = escapeHTML(project.status);
     const description = escapeHTML(project.desc);
     const tags = String(project.tags || "").split("//").map(tag => tag.trim()).filter(Boolean);
-    const cardUrl = project.preview_url && project.preview_url !== "#"
-      ? project.preview_url
-      : (project.source_url && project.source_url !== "#" ? project.source_url : "");
+    const cardUrl = project.preview_url || project.source_url || "#";
 
     if (project.status === "EMPTY_SLOT") {
       projectsContainer.insertAdjacentHTML("beforeend", `
