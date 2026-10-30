@@ -292,3 +292,23 @@ body {
  .projects-grid--archive,.detail-layout { grid-template-columns:1fr; }
  .projects-toolbar { align-items:flex-start; flex-direction:column; }
 }
+
+/* Language switcher */
+.language-toggle {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent-color);
+  font: inherit;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+.language-toggle:hover {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: var(--background-color);
+}
