@@ -57,27 +57,36 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+  // A stretched link makes the whole card open its detail page.
+  // The two action buttons stay above it and remain independent links.
   function card(p) {
     var category = text(p.category, p.categoryRu);
     var description = text(p.shortDescription, p.shortDescriptionRu);
+    var detailUrl = base + p.detailPage;
+    var stack = p.stack.map(function (item) {
+      return '<span class="project-card__tag">' + esc(item) + '</span>';
+    }).join("");
     return (
-      '<article class="project-card"><div class="project-card__topline"><span>' +
-      esc(p.number + " / " + category) +
-      '</span></div><h2 class="project-card__title">' +
-      esc(p.title) +
-      '</h2><p class="project-card__description">' +
-      esc(description) +
-      '</p><p class="project-card__stack">' +
-      p.stack.map(esc).join(" · ") +
-      '</p><div class="project-card__actions"><a class="project-card__link" href="' +
-      esc(base + p.detailPage) +
-      '">' +
-      esc(text("Project details", "Подробнее")) +
-      '</a><a class="project-card__link" href="' +
-      esc(p.github) +
-      '" target="_blank" rel="noreferrer">' +
-      esc(text("Source code", "Исходный код")) +
-      "</a></div></article>"
+      '<article class="project-card project-card--clickable">' +
+      '<a class="project-card__hit-area" href="' + esc(detailUrl) +
+      '" aria-label="' + esc(text("Open project: ", "Открыть проект: ") + p.title) + '"></a>' +
+      '<div class="project-card__topline"><span>' + esc(p.number + " / " + category) +
+      '</span><span class="project-card__indicator" aria-label="Project"></span></div>' +
+      '<div class="project-card__main"><h2 class="project-card__title">' +
+      '<img class="project-card__title-icon" src="' + esc(base + "sources/icons/code.svg") +
+      '" alt="" aria-hidden="true">' + esc(p.title) + '</h2>' +
+      '<p class="project-card__description">' + esc(description) + '</p></div>' +
+      '<div class="project-card__meta"><span class="project-card__meta-label">' +
+      esc(text("TECH STACK", "ТЕХНОЛОГИИ")) + '</span><div class="project-card__stack">' +
+      stack + '</div></div>' +
+      '<div class="project-card__actions">' +
+      '<a class="button button--primary" href="' + esc(detailUrl) + '">' +
+      '<img class="button__icon" src="' + esc(base + "sources/icons/eye.svg") +
+      '" alt="" aria-hidden="true">' + esc(text("Project details", "Подробнее")) + '</a>' +
+      '<a class="button button--secondary" href="' + esc(p.github) +
+      '" target="_blank" rel="noreferrer"><img class="button__icon" src="' +
+      esc(base + "sources/icons/github.svg") + '" alt="" aria-hidden="true">' +
+      esc(text("Source code", "Исходный код")) + '</a></div></article>'
     );
   }
   function renderCards() {
