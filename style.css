@@ -588,3 +588,200 @@ body {
   background: var(--accent-color);
   color: var(--background-color);
 }
+
+
+/* Small visual polish: CRT layer, project cards, icons, and native scrollbars. */
+.site-header__brand {
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 8px rgba(53, 242, 193, 0.28);
+  animation: brand-flicker 7s infinite;
+}
+.site-header__brand::after {
+  content: "[sym_near_one.run]";
+  position: absolute;
+  inset: 0;
+  color: var(--accent-color);
+  opacity: 0.22;
+  transform: translateX(1px);
+  clip-path: inset(48% 0 38% 0);
+  pointer-events: none;
+}
+@keyframes brand-flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97% { opacity: 0.82; }
+  98% { opacity: 1; }
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.11) 0,
+    rgba(0, 0, 0, 0.11) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.28;
+}
+.project-card {
+  position: relative;
+  gap: 0;
+}
+.project-card--clickable {
+  cursor: pointer;
+}
+.project-card__hit-area {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+}
+.project-card__hit-area:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+}
+.project-card__topline,
+.project-card__main,
+.project-card__meta,
+.project-card__actions {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+.project-card__actions a {
+  pointer-events: auto;
+}
+.project-card__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 10px;
+}
+.project-card__title-icon,
+.button__icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+.project-card__description {
+  max-width: 62ch;
+  margin: 0;
+  color: #c3d1d8;
+  line-height: 1.75;
+}
+.project-card__meta {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+.project-card__meta-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+}
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+}
+.project-card__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border: 1px solid rgba(53, 242, 193, 0.2);
+  border-radius: 999px;
+  background: rgba(53, 242, 193, 0.055);
+  color: #b9d8d1;
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.project-card__actions .button {
+  font-size: 0.78rem;
+}
+.project-card__actions .button:hover {
+  transform: translateY(-2px);
+}
+.project-card:hover .project-card__title {
+  text-shadow: 0 0 12px rgba(53, 242, 193, 0.18);
+}
+.button__icon {
+  width: 1.05em;
+  height: 1.05em;
+}
+.button--primary .button__icon {
+  filter: brightness(0);
+}
+.button--secondary .button__icon {
+  filter: none;
+}
+.project-card__indicator {
+  flex: 0 0 auto;
+}
+
+/* Transparent track; accent thumb and arrow controls where WebKit supports them.
+   scrollbar-gutter stays automatic so the page does not reserve an extra gutter. */
+html {
+  scrollbar-gutter: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: var(--accent-color);
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: #8affdf;
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button {
+  display: block;
+  height: 12px;
+  background-color: transparent;
+}
+html::-webkit-scrollbar-button:vertical:decrement,
+body::-webkit-scrollbar-button:vertical:decrement {
+  background:
+    linear-gradient(135deg, transparent 48%, var(--accent-color) 49% 62%, transparent 63%) center 6px / 7px 7px no-repeat;
+}
+html::-webkit-scrollbar-button:vertical:increment,
+body::-webkit-scrollbar-button:vertical:increment {
+  background:
+    linear-gradient(315deg, transparent 48%, var(--accent-color) 49% 62%, transparent 63%) center 0 / 7px 7px no-repeat;
+}
+@media (max-width: 760px) {
+  .project-card { padding: 20px; }
+  .project-card__actions .button { flex: 1 1 auto; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header__brand { animation: none; }
+}
