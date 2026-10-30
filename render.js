@@ -93,7 +93,7 @@ export function renderSystemData(config) {
     }
 
     projectsContainer.insertAdjacentHTML("beforeend", `
-      <article class="matrix-card" ${cardUrl ? `role="link" tabindex="0" data-card-url="${escapeHTML(cardUrl)}"` : ""}>
+      <article class="matrix-card">\n        ${cardUrl ? `<a class="card-hit-area" href="${escapeHTML(cardUrl)}" target="_blank" rel="noreferrer" aria-label="Open project: ${title}"></a>` : ""}
         <div class="card-top">
           <span class="card-id copper-txt">${id} //</span>
           <span class="status-indicator tag-green"><span class="status-dot" aria-hidden="true"></span>STATUS: ${status}</span>
@@ -130,16 +130,4 @@ export function renderSystemData(config) {
       </article>`);
   });
 
-  // The whole card is a shortcut; the two action links keep their own destinations.
-  projectsContainer.querySelectorAll(".matrix-card[data-card-url]").forEach(card => {
-    card.addEventListener("click", event => {
-      if (event.target.closest("a, button")) return;
-      window.open(card.dataset.cardUrl, "_blank", "noopener,noreferrer");
-    });
-    card.addEventListener("keydown", event => {
-      if (event.target !== card || (event.key !== "Enter" && event.key !== " ")) return;
-      event.preventDefault();
-      window.open(card.dataset.cardUrl, "_blank", "noopener,noreferrer");
-    });
-  });
-}
+}\n
