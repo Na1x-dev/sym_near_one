@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sym_near_one</title>
+    <meta name="theme-color" content="#080d12" />
+    <meta name="description" content="Andrew — full-stack developer building web applications with React and Django REST Framework." />
+    <title>Andrew | Full-stack developer</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="site-header">
       <a class="site-header__brand" href="index.html">[sym_near_one.run]</a>
-      <div class="site-header__language-switcher">EN/RU</div>
+      <span class="site-header__status"><span class="status-dot"></span> SYSTEM ONLINE</span>
     </header>
 
     <main class="page-main">
@@ -17,76 +19,88 @@
 
       <section class="hero">
         <div class="hero__content">
-          <h1 class="hero__title paragraph">
-            <span class="hero__title__author">SymNearOne: </span> Hi, I'm Andrew
-            — a full-stack developer building web applications and custom
-            solutions with React and Django REST Framework_
+          <p class="hero__eyebrow">FULL-STACK DEVELOPER / PORTFOLIO</p>
+          <h1 class="hero__title">
+            <span class="hero__title-author">SymNearOne: </span>Hi, I'm Andrew
+            — I build web applications with React and Django REST Framework<span class="hero__cursor">_</span>
           </h1>
-          <!-- <p class="hero__eyebrow"></p> -->
-          <!-- <h1 class="hero__title">
-            <span class="hero__title__author">SymNearOne: </span>I enjoy
-            designing and developing thoughtful engineering solutions that turn
-            ideas into functional, user-friendly products_
-          </h1> -->
-
-          <!-- <div class="hero__actions">
-            <a href="projects.html" class="button button--primary">
-              Explore projects
-            </a>
-            <a
-              href="https://github.com/Na1x-dev"
-              class="button button--secondary"
-            >
-              GitHub
-            </a>
-          </div> -->
+          <p class="hero__description">
+            I enjoy turning ideas into functional, thoughtful, and user-friendly products.
+          </p>
+          <div class="hero__actions">
+            <a href="#projects" class="button button--primary">Explore projects <span aria-hidden="true">↘</span></a>
+            <a href="https://github.com/Na1x-dev" class="button button--secondary" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
         </div>
 
         <div class="hero__visual">
           <div class="terminal-window">
-            <div class="terminal-window__content"></div>
+            <div class="terminal-window__bar">
+              <div class="terminal-window__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span>andrew@portfolio: ~</span>
+              <span class="terminal-window__bar-status">bash</span>
+            </div>
+            <div class="terminal-window__content">
+              <p><span class="terminal-prompt">andrew@portfolio:~$</span> whoami</p>
+              <p class="terminal-output">Full-stack developer</p>
+              <p><span class="terminal-prompt">andrew@portfolio:~$</span> stack --list</p>
+              <p class="terminal-output">React · JavaScript · Python · Django</p>
+              <p><span class="terminal-prompt">andrew@portfolio:~$</span> status</p>
+              <p class="terminal-output terminal-output--success">Ready to build something useful.</p>
+              <p><span class="terminal-prompt">andrew@portfolio:~$</span> <span class="terminal-cursor">▌</span></p>
+              <svg class="terminal-decoration" viewBox="0 0 180 130" fill="none" aria-hidden="true">
+                <path d="M90 8V42H45V72M90 42H135V72M45 72H18V112M45 72V112M135 72H162V112M135 72V112" />
+                <circle cx="90" cy="8" r="4"/><circle cx="45" cy="72" r="4"/><circle cx="135" cy="72" r="4"/>
+                <circle cx="18" cy="112" r="4"/><circle cx="45" cy="112" r="4"/><circle cx="135" cy="112" r="4"/><circle cx="162" cy="112" r="4"/>
+              </svg>
+            </div>
           </div>
         </div>
       </section>
 
       <div class="section-divider" aria-hidden="true"></div>
 
-<h1 class="paragraph after-hero__title">
-            <span class="hero__title__author">SymNearOne: </span>I enjoy
-            designing and developing thoughtful engineering solutions that turn
-            ideas into functional, user-friendly products_
-          </h1>
-
+      <section class="intro">
+        <h2 class="intro__title">
+          <span class="hero__title-author">SymNearOne: </span>I enjoy designing and developing thoughtful engineering solutions that turn ideas into functional, user-friendly products<span class="hero__cursor">_</span>
+        </h2>
+      </section>
 
       <div class="section-divider" aria-hidden="true"></div>
 
-      <section class="about">
-        <h1 class="paragraph">
-      <span class="hero__title__author">SymNearOne: </span>I've built a variety of applications and software solutions. Some of my key projects include  <span class="hero__title__author">Ai Content Helper</span> and  <span class="hero__title__author">TechMatcher</span>, which you can explore below.
+      <section class="about" id="projects">
+        <p class="section-label">// SELECTED PROJECTS</p>
+        <h2 class="about__text">
+          I've built a variety of applications and software solutions. Here are two projects I'm especially happy to share.
+        </h2>
 
-You can also discover more of my work on the [Projects page] or visit my [GitHub profile] to see the rest of my projects and code.
-      </h1>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-card__topline"><span>01 / FULL-STACK</span><span class="project-card__indicator">●</span></div>
+            <h3 class="project-card__title">TechMatcher</h3>
+            <p class="project-card__description">
+              A web application for discovering, comparing, and selecting smartphones. Browse detailed specifications, compare devices, manage a shopping cart, and access a personal account.
+            </p>
+            <p class="project-card__stack">React · Redux Toolkit · Django REST Framework · PostgreSQL</p>
+            <a class="project-card__link" href="https://github.com/Na1x-dev/TechMatcher" target="_blank" rel="noreferrer">View source code ↗</a>
+          </article>
 
-        <div class="main-projects">
-          <div class="project__card">
-            <p class="card__title">TechMatcher</p>
-            <p class="card__description">Full-stack web application designed to make smartphone selection easier through a searchable product catalog and side-by-side device comparison.
-
-Users can explore detailed smartphone specifications, compare multiple models, manage their shopping carts, and create personal accounts. The application also features an automated data collection system that keeps the product catalog updated.
-
-The frontend is built with React and Redux Toolkit, while the backend uses Django REST Framework to provide REST API endpoints, authentication, and user management. Background tasks are handled by Celery and Redis.</p>
-          </div>
-          <div class="project__card">
-            <p class="card__title">Ai Content Helper</p>
-            <p class="card__description">Full-stack SaaS platform designed to simplify content creation with artificial intelligence.
-
-The application allows users to generate platform-specific content for Telegram, VC.ru, and X (Twitter), customize writing styles, and manage their daily generation limits through a subscription-based system.</p></div>
+          <article class="project-card">
+            <div class="project-card__topline"><span>02 / AI-POWERED SAAS</span><span class="project-card__indicator">●</span></div>
+            <h3 class="project-card__title">AI Content Helper</h3>
+            <p class="project-card__description">
+              An AI-powered platform for creating content for Telegram, VC.ru, and X. Generate platform-specific drafts, customize writing styles, and manage usage limits.
+            </p>
+            <p class="project-card__stack">React · Django REST Framework · Celery · Redis · OpenAI API</p>
+            <a class="project-card__link" href="https://github.com/Na1x-dev/ai_content_helper" target="_blank" rel="noreferrer">View source code ↗</a>
+          </article>
         </div>
       </section>
-      
-</section>
     </main>
-    
-    <footer class="site-footer"></footer>
+
+    <footer class="site-footer">
+      <span>© 2026 SymNearOne</span>
+      <span>BUILT WITH CURIOSITY <span class="footer-accent">✳</span></span>
+    </footer>
   </body>
 </html>
