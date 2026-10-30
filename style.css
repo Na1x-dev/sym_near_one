@@ -737,6 +737,7 @@ body::after {
 /* Transparent track; accent thumb and arrow controls where WebKit supports them.
    scrollbar-gutter stays automatic so the page does not reserve an extra gutter. */
 html {
+  overflow-y: overlay; /* Legacy WebKit hint: overlay scrollbar where supported. */
   scrollbar-gutter: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-color) transparent;
