@@ -1259,3 +1259,17 @@ body::after {
     #hud-version-brand::before { animation: none; }
     .matrix-card { transition: none; }
 }
+
+/* Keep the stretched project link above card copy, but below action buttons. */
+.card-top,
+.card-main,
+.card-tech-section,
+.card-footer {
+    position: static;
+    z-index: auto;
+}
+
+.card-buttons {
+    position: relative;
+    z-index: 3;
+}
