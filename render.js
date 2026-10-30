@@ -1,76 +1,145 @@
 // ==========================================================================
-// СИСТЕМНЫЙ МОДУЛЬ РЕНДЕРИНГА (RENDER ENGINE)
-// ==========================================================================
+ // SYSTEM DATA RENDERER
+ // ==========================================================================
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
 
 export function renderSystemData(config) {
-  // 1. Внедрение данных профиля (блок ABOUT)
-  document.getElementById('hud-version-brand').innerHTML = `
-    <span class="magenta-txt">[CORE_SYS]</span><span class="cyan-txt">_${config.profile.version}</span>
+  // Profile
+  const brand = document.getElementById("hud-version-brand");
+  brand.innerHTML = `
+    <span class="magenta-txt">[CORE_SYS]</span><span class="cyan-txt">_${escapeHTML(config.profile.version)}</span>
   `;
-  document.getElementById('profile-name').innerText = `GUEST_ID // ${config.profile.name}`;
-  document.getElementById('profile-declaration').innerText = config.profile.declaration;
-  document.getElementById('profile-background').innerText = config.profile.background;
-  document.getElementById('link-tg').href = config.profile.telegram;
-  document.getElementById('link-gh').href = config.profile.github;
-  document.getElementById('footer-node').innerText = config.profile.node_address;
+  brand.dataset.glitch = `[CORE_SYS]_${config.profile.version}`;
 
-  // 2. Внедрение системных логов реального времени
-  const logsContainer = document.getElementById('logs-container');
-  const timeMarks = ['18:10:02', '18:10:05', '18:12:43', '18:15:23'];
-  const typeClasses = ['cyan-txt', 'copper-txt', 'cyan-txt', 'cyan-txt'];
-  const typePrefixes = ['SYS_OK:', 'NET_OK:', 'LOAD:', 'DONE:'];
+  document.getElementById("profile-name").innerText = `GUEST_ID // ${config.profile.name}`;
+  document.getElementById("profile-declaration").innerText = config.profile.declaration;
+  document.getElementById("profile-background").innerText = config.profile.background;
 
-  logsContainer.innerHTML = ''; // Очистка перед заполнением
+  const telegramLink = document.getElementById("link-tg");
+  telegramLink.href = config.profile.telegram;
+  telegramLink.target = "_blank";
+  telegramLink.rel = "noreferrer";
+
+  const githubLink = document.getElementById("link-gh");
+  githubLink.href = config.profile.github;
+  githubLink.target = "_blank";
+  githubLink.rel = "noreferrer";
+
+  document.getElementById("footer-node").innerText = config.profile.node_address;
+
+  // Live activity log
+  const logsContainer = document.getElementById("logs-container");
+  const timeMarks = ["18:10:02", "18:10:05", "18:12:43", "18:15:23"];
+  const typeClasses = ["cyan-txt", "copper-txt", "cyan-txt", "cyan-txt"];
+  const typePrefixes = ["SYS_OK:", "NET_OK:", "LOAD:", "DONE:"];
+
+  logsContainer.innerHTML = "";
   config.live_logs.forEach((logText, idx) => {
-    const time = timeMarks[idx] || '18:16:00';
-    const cssClass = typeClasses[idx] || 'cyan-txt';
-    const prefix = typePrefixes[idx] || 'INFO:';
     logsContainer.innerHTML += `
       <p class="stream-line">
-        <span class="muted-txt">[${time}]</span> 
-        <span class="${cssClass}">${prefix}</span> ${logText}
+        <span class="muted-txt">[${timeMarks[idx] || "18:16:00"}]</span>
+        <span class="${typeClasses[idx] || "cyan-txt"}">${typePrefixes[idx] || "INFO:"}</span>
+        ${escapeHTML(logText)}
       </p>`;
   });
 
-  // 3. Внедрение шкал навыков
-  const skillsContainer = document.getElementById('skills-container');
-  skillsContainer.innerHTML = '';
+  // Skill meters
+  const skillsContainer = document.getElementById("skills-container");
+  skillsContainer.innerHTML = "";
   config.skills.forEach(skill => {
+    const type = ["magenta", "copper", "cyan"].includes(skill.type) ? skill.type : "cyan";
+    const level = Math.max(0, Math.min(100, Number(skill.level) || 0));
     skillsContainer.innerHTML += `
       <div class="skill-progress-wrapper">
         <div class="skill-info">
-          <span class="matrix-txt">${skill.name}</span>
-          <span class="${skill.type}-txt">${skill.level}%</span>
+          <span class="matrix-txt">${escapeHTML(skill.name)}</span>
+          <span class="${type}-txt">${level}%</span>
         </div>
         <div class="progress-bar-total">
-          <div class="progress-bar-fill fill-${skill.type}" data-target-width="${skill.level}%" style="width: 0%;"></div>
+          <div class="progress-bar-fill fill-${type}" data-target-width="${level}%" style="width: 0%;"></div>
         </div>
       </div>`;
   });
 
-  // 4. Внедрение карточек проектов в хранилище портфолио
-  const projectsContainer = document.getElementById('projects-container');
-  projectsContainer.innerHTML = '';
+  // Project cards
+  const projectsContainer = document.getElementById("projects-container");
+  projectsContainer.innerHTML = "";
+
   config.projects.forEach(project => {
+    const title = escapeHTML(project.title);
+    const id = escapeHTML(project.id);
+    const status = escapeHTML(project.status);
+    const description = escapeHTML(project.desc);
+    const tags = String(project.tags || "").split("//").map(tag => tag.trim()).filter(Boolean);
+    const cardUrl = project.preview_url && project.preview_url !== "#"
+      ? project.preview_url
+      : (project.source_url && project.source_url !== "#" ? project.source_url : "");
+
     if (project.status === "EMPTY_SLOT") {
-      projectsContainer.innerHTML += `
-        <div class="matrix-card empty-card">
-          <div class="card-top"><span class="muted-txt">${project.id} //</span><span class="muted-txt">STATUS: EMPTY_SLOT</span></div>
-          <h3 class="muted-txt">${project.title}</h3>
-          <p class="muted-txt">${project.desc}</p>
-        </div>`;
-    } else {
-      projectsContainer.innerHTML += `
-        <div class="matrix-card">
-          <div class="card-top"><span class="copper-txt">${project.id} //</span><span class="status-indicator tag-green">STATUS: ${project.status}</span></div>
-          <h3 class="cyan-txt">${project.title}</h3>
-          <p class="dim-cyan-txt">${project.desc}</p>
-          <div class="card-meta-tags">${project.tags}</div>
-          <div class="card-buttons">
-            <a href="${project.preview_url}" class="action-btn block-magenta">EXECUTE_PREVIEW</a>
-            <a href="${project.source_url}" class="action-btn block-muted">GET_SRC_CODE</a>
+      projectsContainer.insertAdjacentHTML("beforeend", `
+        <article class="matrix-card empty-card">
+          <div class="card-top">
+            <span class="muted-txt">${id} //</span>
+            <span class="muted-txt">STATUS: EMPTY_SLOT</span>
           </div>
-        </div>`;
+          <h3 class="muted-txt">${title}</h3>
+          <p class="muted-txt">${description}</p>
+        </article>`);
+      return;
     }
+
+    projectsContainer.insertAdjacentHTML("beforeend", `
+      <article class="matrix-card" ${cardUrl ? `role="link" tabindex="0" data-card-url="${escapeHTML(cardUrl)}"` : ""}>
+        <div class="card-top">
+          <span class="card-id copper-txt">${id} //</span>
+          <span class="status-indicator tag-green"><span class="status-dot" aria-hidden="true"></span>STATUS: ${status}</span>
+        </div>
+
+        <div class="card-main">
+          <div class="card-heading">
+            <span class="card-project-icon" aria-hidden="true">
+              <img src="sources/icons/code.svg" alt="">
+            </span>
+            <h3 class="cyan-txt">${title}</h3>
+          </div>
+          <p class="card-description">${description}</p>
+        </div>
+
+        <div class="card-tech-section">
+          <span class="card-section-label">TECH_STACK</span>
+          <div class="card-meta-tags">
+            ${tags.map(tag => `<span class="tech-tag">${escapeHTML(tag)}</span>`).join("")}
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <span class="card-open-hint"><img src="sources/icons/external-link.svg" alt=""> OPEN_PROJECT</span>
+          <div class="card-buttons">
+            <a href="${escapeHTML(project.preview_url || "#")}" class="action-btn block-magenta" target="_blank" rel="noreferrer">
+              <img src="sources/icons/eye.svg" alt=""> EXECUTE_PREVIEW
+            </a>
+            <a href="${escapeHTML(project.source_url || "#")}" class="action-btn block-muted" target="_blank" rel="noreferrer">
+              <img src="sources/icons/github.svg" alt=""> GET_SRC_CODE
+            </a>
+          </div>
+        </div>
+      </article>`);
+  });
+
+  // The whole card is a shortcut; the two action links keep their own destinations.
+  projectsContainer.querySelectorAll(".matrix-card[data-card-url]").forEach(card => {
+    card.addEventListener("click", event => {
+      if (event.target.closest("a, button")) return;
+      window.open(card.dataset.cardUrl, "_blank", "noopener,noreferrer");
+    });
+    card.addEventListener("keydown", event => {
+      if (event.target !== card || (event.key !== "Enter" && event.key !== " ")) return;
+      event.preventDefault();
+      window.open(card.dataset.cardUrl, "_blank", "noopener,noreferrer");
+    });
   });
 }
