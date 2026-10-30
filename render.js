@@ -93,7 +93,7 @@ export function renderSystemData(config) {
     }
 
     projectsContainer.insertAdjacentHTML("beforeend", `
-      <article class="matrix-card">\n        ${cardUrl ? `<a class="card-hit-area" href="${escapeHTML(cardUrl)}" target="_blank" rel="noreferrer" aria-label="Open project: ${title}"></a>` : ""}
+      <article class="matrix-card${cardUrl ? " matrix-card--clickable" : ""}">\n        ${cardUrl ? `<a class="card-hit-area" href="${escapeHTML(cardUrl)}" target="_blank" rel="noreferrer" aria-label="Open project: ${title}"></a>` : ""}
         <div class="card-top">
           <span class="card-id copper-txt">${id} //</span>
           <span class="status-indicator tag-green"><span class="status-dot" aria-hidden="true"></span>STATUS: ${status}</span>
