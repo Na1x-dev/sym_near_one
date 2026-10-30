@@ -1273,3 +1273,7 @@ body::after {
     position: relative;
     z-index: 3;
 }
+
+.matrix-card { cursor: default; }
+.matrix-card--clickable { cursor: pointer; }
+.matrix-card.empty-card { cursor: default; }
