@@ -901,3 +901,361 @@ body {
     z-index: 2;
     /* Окно загрузки гарантированно поверх сетки */
 }
+
+/* ==========================================================================
+   CRT FINISH // SUBTLE DISPLAY TEXTURE AND LOGO TREATMENT
+   ========================================================================== */
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.11;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.28) 0,
+        rgba(0, 0, 0, 0.28) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+}
+
+#hud-version-brand {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    text-shadow: 0 0 8px rgba(0, 235, 212, 0.25);
+    animation: crt-logo-flicker 7s steps(1, end) infinite;
+}
+
+#hud-version-brand::before {
+    content: attr(data-glitch);
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    color: var(--cyber-turquoise);
+    opacity: 0.35;
+    transform: translateX(1px);
+    clip-path: inset(0 0 58% 0);
+    pointer-events: none;
+    animation: crt-logo-shift 5s steps(1, end) infinite;
+}
+
+#hud-version-brand::after {
+    content: "";
+    position: absolute;
+    inset: -3px -5px;
+    pointer-events: none;
+    opacity: 0.22;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 2px,
+        rgba(0, 235, 212, 0.22) 3px,
+        transparent 4px
+    );
+}
+
+@keyframes crt-logo-flicker {
+    0%, 94%, 96%, 100% { opacity: 1; }
+    95% { opacity: 0.82; }
+    97% { opacity: 0.94; }
+}
+
+@keyframes crt-logo-shift {
+    0%, 88%, 91%, 100% { transform: translateX(1px); clip-path: inset(0 0 58% 0); }
+    89% { transform: translateX(-2px); clip-path: inset(18% 0 42% 0); }
+    90% { transform: translateX(2px); clip-path: inset(65% 0 8% 0); }
+}
+
+
+/* ==========================================================================
+   PROJECT CARDS // CLEAR HIERARCHY, TECH CHIPS AND STRETCHED LINK
+   ========================================================================== */
+
+.matrix-card {
+    position: relative;
+    overflow: hidden;
+    gap: 0;
+    border-left-width: 3px;
+    cursor: pointer;
+}
+
+.matrix-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 72px;
+    height: 72px;
+    pointer-events: none;
+    opacity: 0.16;
+    background: linear-gradient(135deg, transparent 49%, var(--cyber-turquoise) 50%, transparent 51%);
+}
+
+.matrix-card:hover {
+    border-color: var(--cyber-turquoise);
+    box-shadow: 0 0 22px rgba(0, 235, 212, 0.09);
+    transform: translateY(-3px);
+}
+
+.card-hit-area {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+}
+
+.card-hit-area:focus-visible {
+    outline: 2px solid var(--cyber-turquoise);
+    outline-offset: -4px;
+}
+
+.card-top {
+    position: relative;
+    z-index: 2;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 235, 212, 0.16);
+    letter-spacing: 0.04em;
+}
+
+.card-id {
+    font-size: 0.82rem;
+}
+
+.status-indicator.tag-green {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: var(--cyber-green);
+    box-shadow: 0 0 8px rgba(0, 255, 170, 0.65);
+}
+
+.card-main,
+.card-tech-section {
+    position: relative;
+    z-index: 2;
+}
+
+.card-main {
+    padding: 19px 0 16px;
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 10px;
+}
+
+.card-project-icon {
+    display: grid;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid rgba(0, 235, 212, 0.35);
+    background: rgba(0, 235, 212, 0.06);
+}
+
+.card-project-icon img {
+    display: block;
+    width: 21px;
+    height: 21px;
+}
+
+.card-heading h3 {
+    margin: 0;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.card-description {
+    max-width: 70ch;
+    margin: 0;
+    color: var(--text-hud);
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.card-section-label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--cyber-copper);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+}
+
+.card-meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 0;
+    color: var(--text-hud);
+}
+
+.tech-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    padding: 4px 9px;
+    border: 1px solid rgba(0, 235, 212, 0.24);
+    border-radius: 3px;
+    background: rgba(0, 235, 212, 0.055);
+    color: #9debe2;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+.card-footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 235, 212, 0.16);
+}
+
+.card-open-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.card-open-hint img {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+}
+
+.card-buttons {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 9px;
+    width: auto;
+    margin: 0;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 39px;
+    padding: 9px 13px;
+    font-size: 0.78rem;
+    letter-spacing: 0.035em;
+    white-space: nowrap;
+}
+
+.action-btn img {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+.block-magenta {
+    background: var(--cyber-magenta);
+    border-color: var(--cyber-magenta);
+    color: #020308;
+}
+
+.block-magenta:hover {
+    background: transparent;
+    border-color: var(--cyber-magenta);
+    color: var(--cyber-magenta) !important;
+}
+
+.block-muted {
+    border-color: rgba(0, 235, 212, 0.5);
+    color: var(--cyber-turquoise);
+    background: rgba(0, 235, 212, 0.035);
+}
+
+.block-muted:hover {
+    border-color: var(--cyber-turquoise);
+    color: #020308;
+    background: var(--cyber-turquoise);
+}
+
+.btn-flat {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.contact-icon {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+@media (max-width: 768px) {
+    .card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .card-open-hint {
+        display: none;
+    }
+
+    .card-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .action-btn {
+        min-width: 0;
+        padding: 9px 7px;
+        font-size: 0.72rem;
+    }
+
+    .card-description {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .card-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::after { display: none; }
+    #hud-version-brand,
+    #hud-version-brand::before { animation: none; }
+    .matrix-card { transition: none; }
+}
