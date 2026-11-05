@@ -810,3 +810,51 @@ body::-webkit-scrollbar-button:vertical:increment {
     animation: none;
   }
 }
+
+
+/* Accessible icon hover states and terminal command effects */
+.button__icon, .language-toggle__icon, .terminal-submit__icon {
+  transition: filter 180ms ease, transform 180ms ease;
+}
+.button:hover .button__icon, .language-toggle:hover .language-toggle__icon,
+.terminal-input button:hover .terminal-submit__icon {
+  transform: translateX(2px);
+  filter: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(440%) hue-rotate(290deg) brightness(105%);
+}
+.button--primary .button__icon { filter: brightness(0); }
+.button--primary:hover .button__icon { filter: brightness(0) invert(1); }
+.button--secondary .button__icon { filter: brightness(0) saturate(100%) invert(83%) sepia(31%) saturate(1040%) hue-rotate(105deg); }
+.button--secondary:hover .button__icon { filter: brightness(0); }
+.hero__title, .page-title { text-decoration: none; }
+.hero__title *, .page-title * { text-decoration: none; }
+.terminal-link-line a { color: var(--accent-color); text-decoration: none; border-bottom: 1px dashed currentColor; }
+.terminal-link-line a:hover { color: #fff; }
+:root[data-terminal-theme="pink"] {
+  --accent-color: #ff4f91;
+  --border-color: rgba(255, 79, 145, .25);
+  --status-color: #ff9cbd;
+  --terminal-path-color: #ff8ab5;
+}
+.terminal-glitch { animation: terminal-glitch 140ms steps(2, end) 8; }
+@keyframes terminal-glitch {
+  0% { transform: translate(0); filter: none; }
+  25% { transform: translate(2px, -1px); filter: hue-rotate(90deg); }
+  50% { transform: translate(-2px, 1px); filter: contrast(1.5); }
+  75% { transform: translate(1px, 2px); filter: hue-rotate(-90deg); }
+}
+.terminal-matrix-mode::before {
+  content: "01001010 01010101 01010011 01010100 01000001 01001110 01001111";
+  position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  display: grid; place-items: center; color: #54ff75;
+  font-size: clamp(12px, 2vw, 24px); letter-spacing: .2em;
+  text-shadow: 0 0 12px #00ff48; opacity: .72;
+  animation: matrix-fade 2.6s ease forwards;
+}
+.terminal-matrix { color: #54ff75; text-shadow: 0 0 8px #00ff48; }
+@keyframes matrix-fade { 0% { opacity: 0; } 15% { opacity: .8; } 80% { opacity: .8; } 100% { opacity: 0; } }
+.terminal-hack { color: var(--status-color); }
+.language-toggle { display: inline-flex; align-items: center; gap: 7px; }
+.terminal-input button { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; min-height: 28px; }
+@media (prefers-reduced-motion: reduce) {
+  .terminal-glitch, .terminal-matrix-mode::before { animation: none; }
+}
