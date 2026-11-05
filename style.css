@@ -73,7 +73,7 @@ body {
   height: 7px;
   margin-right: 8px;
   border-radius: 50%;
-  background: var(--status-color);
+  background: var(--accent-color);
   box-shadow: 0 0 10px rgba(139, 255, 138, 0.65);
 }
 
@@ -589,7 +589,6 @@ body {
   color: var(--background-color);
 }
 
-
 /* Small visual polish: CRT layer, project cards, icons, and native scrollbars. */
 .site-header__brand {
   position: relative;
@@ -608,9 +607,17 @@ body {
   pointer-events: none;
 }
 @keyframes brand-flicker {
-  0%, 96%, 100% { opacity: 1; }
-  97% { opacity: 0.82; }
-  98% { opacity: 1; }
+  0%,
+  96%,
+  100% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.82;
+  }
+  98% {
+    opacity: 1;
+  }
 }
 body::after {
   content: "";
@@ -771,18 +778,35 @@ body::-webkit-scrollbar-button {
 }
 html::-webkit-scrollbar-button:vertical:decrement,
 body::-webkit-scrollbar-button:vertical:decrement {
-  background:
-    linear-gradient(135deg, transparent 48%, var(--accent-color) 49% 62%, transparent 63%) center 6px / 7px 7px no-repeat;
+  background: linear-gradient(
+      135deg,
+      transparent 48%,
+      var(--accent-color) 49% 62%,
+      transparent 63%
+    )
+    center 6px / 7px 7px no-repeat;
 }
 html::-webkit-scrollbar-button:vertical:increment,
 body::-webkit-scrollbar-button:vertical:increment {
-  background:
-    linear-gradient(315deg, transparent 48%, var(--accent-color) 49% 62%, transparent 63%) center 0 / 7px 7px no-repeat;
+  background: linear-gradient(
+      315deg,
+      transparent 48%,
+      var(--accent-color) 49% 62%,
+      transparent 63%
+    )
+    center 0 / 7px 7px no-repeat;
 }
 @media (max-width: 760px) {
-  .project-card { padding: 20px; }
-  .project-card__actions .button { flex: 1 1 auto; justify-content: center; }
+  .project-card {
+    padding: 20px;
+  }
+  .project-card__actions .button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .site-header__brand { animation: none; }
+  .site-header__brand {
+    animation: none;
+  }
 }
