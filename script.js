@@ -177,6 +177,65 @@ document.addEventListener("DOMContentLoaded", function () {
     output.appendChild(p);
     output.scrollTop = output.scrollHeight;
   }
+  function linkLine(label, href) {
+    var p = document.createElement("p");
+    p.className = "terminal-output terminal-link-line";
+    var a = document.createElement("a");
+    a.href = href;
+    a.textContent = label;
+    a.target = "_blank";
+    a.rel = "noreferrer";
+    p.appendChild(a);
+    output.appendChild(p);
+    output.scrollTop = output.scrollHeight;
+  }
+  var profileLinks = {
+    github: "https://github.com/Na1x-dev",
+    email: "",
+    linkedin: ""
+  };
+  function setTheme(theme) {
+    document.documentElement.dataset.terminalTheme = theme;
+    line(text("Theme switched to " + theme + ".", "Цветовая тема изменена: " + theme + "."),
+      "terminal-output--success");
+  }
+  function runGlitch() {
+    document.body.classList.remove("terminal-glitch");
+    void document.body.offsetWidth;
+    document.body.classList.add("terminal-glitch");
+    window.setTimeout(function () {
+      document.body.classList.remove("terminal-glitch");
+    }, 1400);
+    line(text("Visual interference detected. Signal restored.", "Обнаружены помехи. Сигнал восстановлен."));
+  }
+  function runHack() {
+    var messages = language === "ru"
+      ? ["Инициализация безопасного соединения...", "Сканирование портов...", "Обход воображаемого файрвола...", "Доступ получен. Шутка — это портфолио 😎"]
+      : ["Initializing secure connection...", "Scanning ports...", "Bypassing imaginary firewall...", "Access granted. Just kidding — it's a portfolio 😎"];
+    var p = document.createElement("p");
+    p.className = "terminal-output terminal-hack";
+    output.appendChild(p);
+    var i = 0;
+    function step() {
+      p.textContent = messages[i];
+      output.scrollTop = output.scrollHeight;
+      i += 1;
+      if (i < messages.length) window.setTimeout(step, 650);
+      else p.classList.add("terminal-output--success");
+    }
+    step();
+  }
+  function runMatrix() {
+    var p = document.createElement("p");
+    p.className = "terminal-output terminal-matrix";
+    p.textContent = "01001000 01000001 01000011 01001011 01000101 01010010  ░▒▓█";
+    output.appendChild(p);
+    document.body.classList.add("terminal-matrix-mode");
+    window.setTimeout(function () {
+      document.body.classList.remove("terminal-matrix-mode");
+    }, 2600);
+    output.scrollTop = output.scrollHeight;
+  }
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     var raw = input.value.trim();
@@ -200,6 +259,14 @@ document.addEventListener("DOMContentLoaded", function () {
               "  projects   список проектов",
               "  open NAME  открыть проект",
               "  contact    GitHub",
+              "  links      полезные ссылки",
+              "  matrix     эффект Matrix",
+              "  hack       симуляция взлома",
+              "  pink       красно-розовая тема",
+              "  green      вернуть исходную тему",
+              "  glitch     визуальный glitch",
+              "  date       дата и время",
+              "  sudo       секретная команда",
               "  clear      очистить терминал",
             ]
           : [
@@ -210,6 +277,14 @@ document.addEventListener("DOMContentLoaded", function () {
               "  projects   List projects",
               "  open NAME  Open a project page",
               "  contact    Show GitHub link",
+              "  links      Useful profile links",
+              "  matrix     Matrix visual effect",
+              "  hack       Simulated hacking sequence",
+              "  pink       Red-pink color theme",
+              "  green      Restore original theme",
+              "  glitch     Visual glitch effect",
+              "  date       Show date and time",
+              "  sudo       A secret command",
               "  clear      Clear the terminal",
             ],
       whoami:
@@ -251,6 +326,28 @@ document.addEventListener("DOMContentLoaded", function () {
           ),
           "terminal-error",
         );
+      return;
+    }
+    if (command === "links") {
+      line(text("Useful links:", "Полезные ссылки:"));
+      linkLine("GitHub — Na1x-dev", profileLinks.github);
+      if (profileLinks.email) linkLine("Email — " + profileLinks.email, "mailto:" + profileLinks.email);
+      else line(text("Email: add your address to profileLinks.email in script.js", "Email: добавь адрес в profileLinks.email в script.js"));
+      if (profileLinks.linkedin) linkLine("LinkedIn", profileLinks.linkedin);
+      else line(text("LinkedIn: add your profile URL to profileLinks.linkedin in script.js", "LinkedIn: добавь ссылку в profileLinks.linkedin в script.js"));
+      return;
+    }
+    if (command === "pink") { setTheme("pink"); return; }
+    if (command === "green") { setTheme("default"); return; }
+    if (command === "glitch") { runGlitch(); return; }
+    if (command === "matrix") { runMatrix(); return; }
+    if (command === "hack") { runHack(); return; }
+    if (command === "date") {
+      line(new Date().toLocaleString(language === "ru" ? "ru-RU" : "en-GB"));
+      return;
+    }
+    if (command === "sudo") {
+      line(text("Nice try. You already have root access to this portfolio. 😏", "Хорошая попытка. У тебя уже есть root-доступ к этому портфолио. 😏"));
       return;
     }
     if (command === "status") {
