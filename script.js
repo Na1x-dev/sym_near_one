@@ -153,11 +153,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .join("") +
       '</ul></section></div><div class="hero__actions"><a class="button button--primary" href="' +
       esc(p.github) +
-      '" target="_blank" rel="noreferrer">' +
+      '" target="_blank" rel="noreferrer"><img class="button__icon" src="' +
+      esc(base + "sources/icons/github.svg") +
+      '" alt="" aria-hidden="true">' +
       esc(text("View source code", "Посмотреть исходный код")) +
       '</a><a class="button button--secondary" href="' +
       esc(base + "projects.html") +
-      '">' +
+      '"><img class="button__icon" src="' +
+      esc(base + "sources/icons/arrow-up-right.svg") +
+      '" alt="" aria-hidden="true">' +
       esc(text("All projects", "Все проекты")) +
       "</a></div>";
   }
