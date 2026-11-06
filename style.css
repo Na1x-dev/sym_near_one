@@ -1456,3 +1456,46 @@ button,
     opacity: 0.62;
   }
 }
+
+
+/* Prevent the uninitialized page from flashing before saved preferences apply. */
+html.is-loading,
+html.is-loading body {
+  overflow: hidden;
+}
+html.is-loading body {
+  visibility: hidden;
+}
+html.is-loading::before {
+  content: "INITIALIZING SYSTEM...";
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-top: 54px;
+  background: var(--background-color, #080d12);
+  color: var(--accent-color, #35f2c1);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+}
+html.is-loading::after {
+  content: "";
+  position: fixed;
+  z-index: 10000;
+  top: calc(50% - 23px);
+  left: calc(50% - 13px);
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--border-color, rgba(53, 242, 193, 0.22));
+  border-top-color: var(--accent-color, #35f2c1);
+  border-radius: 50%;
+  animation: site-loader-spin 700ms linear infinite;
+}
+@keyframes site-loader-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.is-loading::after { animation-duration: 1800ms; }
+}
