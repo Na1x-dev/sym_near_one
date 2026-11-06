@@ -78,55 +78,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // A stretched link makes the whole card open its detail page.
   // The two action buttons stay above it and remain independent links.
+  function statusLabel(p) {
+    if (p.status === "released") return text("Released", "Готов");
+    if (p.status === "nearly-ready") return text("Almost ready", "Почти готов");
+    if (p.statusNote) return text(p.statusNote, p.statusNoteRu);
+    return text("In development", "В разработке");
+  }
   function card(p) {
     var category = text(p.category, p.categoryRu);
     var description = text(p.shortDescription, p.shortDescriptionRu);
     var detailUrl = base + p.detailPage;
-    var stack = p.stack
-      .map(function (item) {
-        return '<span class="project-card__tag">' + esc(item) + "</span>";
-      })
-      .join("");
+    var stack = p.stack.map(function (item) {
+      return '<span class="project-card__tag">' + esc(item) + "</span>";
+    }).join("");
     return (
       '<article class="project-card project-card--clickable">' +
-      '<a class="project-card__hit-area" href="' +
-      esc(detailUrl) +
-      '" aria-label="' +
-      esc(text("Open project: ", "Открыть проект: ") + p.title) +
-      '"></a>' +
-      '<div class="project-card__topline"><span>' +
-      esc(p.number + " / " + category) +
-      '</span><span class="project-card__indicator" aria-label="Project"></span></div>' +
+      '<a class="project-card__hit-area" href="' + esc(detailUrl) +
+      '" aria-label="' + esc(text("Open project: ", "Открыть проект: ") + p.title) + '"></a>' +
+      '<div class="project-card__topline"><span>' + esc(p.number + " / " + category) +
+      '</span><span class="project-status project-status--' + esc(p.status) + '">' +
+      esc(statusLabel(p)) + '</span></div>' +
       '<div class="project-card__main"><h2 class="project-card__title">' +
-      '<img class="project-card__title-icon" src="' +
-      esc(base + "sources/icons/code.svg") +
-      '" alt="" aria-hidden="true">' +
-      esc(p.title) +
-      "</h2>" +
-      '<p class="project-card__description">' +
-      esc(description) +
-      "</p></div>" +
+      '<img class="project-card__title-icon" src="' + esc(base + "sources/icons/code.svg") +
+      '" alt="" aria-hidden="true">' + esc(p.title) + "</h2>" +
+      '<p class="project-card__description">' + esc(description) + "</p></div>" +
       '<div class="project-card__meta"><span class="project-card__meta-label">' +
-      esc(text("TECH STACK", "ТЕХНОЛОГИИ")) +
-      '</span><div class="project-card__stack">' +
-      stack +
-      "</div></div>" +
-      '<div class="project-card__actions">' +
-      '<a class="button button--primary" href="' +
-      esc(detailUrl) +
-      '">' +
-      '<img class="button__icon" src="' +
-      esc(base + "sources/icons/eye.svg") +
-      '" alt="" aria-hidden="true">' +
-      esc(text("Project details", "Подробнее")) +
-      "</a>" +
-      '<a class="button button--secondary" href="' +
-      esc(p.github) +
+      esc(text("TECH STACK", "ТЕХНОЛОГИИ")) + '</span><div class="project-card__stack">' +
+      stack + "</div></div>" +
+      '<div class="project-card__actions"><a class="button button--primary" href="' +
+      esc(detailUrl) + '"><img class="button__icon" src="' + esc(base + "sources/icons/eye.svg") +
+      '" alt="" aria-hidden="true">' + esc(text("Project details", "Подробнее")) + "</a>" +
+      '<a class="button button--secondary" href="' + esc(p.github) +
       '" target="_blank" rel="noreferrer"><img class="button__icon" src="' +
-      esc(base + "sources/icons/github.svg") +
-      '" alt="" aria-hidden="true">' +
-      esc(text("Source code", "Исходный код")) +
-      "</a></div></article>"
+      esc(base + "sources/icons/github.svg") + '" alt="" aria-hidden="true">' +
+      esc(text("Source code", "Исходный код")) + "</a></div></article>"
     );
   }
   function renderCards() {
@@ -153,6 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
       '</p><h1 class="page-title">' +
       esc(p.title) +
       '<span class="hero__cursor">_</span></h1>' +
+      '<div class="detail-status-row"><span class="project-status project-status--' + esc(p.status) + '">' +
+      esc(statusLabel(p)) + '</span></div>' +
       '<section class="detail-overview"><div><p class="detail-overview__label">' +
       esc(text("PROJECT OVERVIEW", "О ПРОЕКТЕ")) +
       '</p><p class="detail-overview__text">' +
@@ -174,7 +161,12 @@ document.addEventListener("DOMContentLoaded", function () {
       esc(base + "sources/icons/github.svg") +
       '" alt="" aria-hidden="true">' +
       esc(text("View source code", "Посмотреть исходный код")) +
-      '</a><a class="button button--secondary" href="' +
+      '</a>' +
+      (p.liveDemo ? '<a class="button button--secondary" href="' + esc(p.liveDemo) +
+      '" target="_blank" rel="noreferrer"><img class="button__icon" src="' +
+      esc(base + "sources/icons/arrow-up-right.svg") + '" alt="" aria-hidden="true">' +
+      esc(text("Live demo", "Открыть демо")) + '</a>' : '') +
+      '<a class="button button--secondary" href="' +
       esc(base + "projects.html") +
       '"><img class="button__icon" src="' +
       esc(base + "sources/icons/arrow-up-right.svg") +
