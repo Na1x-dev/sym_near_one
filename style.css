@@ -6,7 +6,7 @@
   --surface-color: #101a21;
   --status-color: #8bff8a;
   --muted-color: #a8bac5;
-  --border-color: rgba(53, 242, 193, 0.22);
+  --border-color: color-mix(in srgb, var(--accent-color) 22%, transparent);
   --terminal-path-color: #0061bb;
   --font-text: Inter, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -36,7 +36,7 @@ body {
   background:
     radial-gradient(
       ellipse at 78% 20%,
-      rgba(53, 242, 193, 0.07),
+      color-mix(in srgb, var(--accent-color) 7%, transparent),
       transparent 34%
     ),
     var(--background-color);
@@ -74,7 +74,7 @@ body {
   margin-right: 8px;
   border-radius: 50%;
   background: var(--accent-color);
-  box-shadow: 0 0 10px rgba(139, 255, 138, 0.65);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 65%, transparent);
 }
 
 .section-divider {
@@ -84,7 +84,7 @@ body {
   background: linear-gradient(
     90deg,
     var(--border-color),
-    rgba(53, 242, 193, 0.02)
+    color-mix(in srgb, var(--accent-color) 2%, transparent)
   );
 }
 
@@ -173,7 +173,7 @@ body {
 .button--primary:hover {
   background: transparent;
   color: var(--accent-color);
-  box-shadow: 0 12px 35px rgba(53, 242, 193, 0.07);
+  box-shadow: 0 12px 35px color-mix(in srgb, var(--accent-color) 7%, transparent);
 }
 .button--secondary {
   background: transparent;
@@ -181,7 +181,7 @@ body {
 .button--secondary:hover {
   background: var(--accent-color);
   color: var(--background-color);
-  box-shadow: 0 12px 35px rgba(53, 242, 193, 0.07);
+  box-shadow: 0 12px 35px color-mix(in srgb, var(--accent-color) 7%, transparent);
 }
 
 .terminal-window {
@@ -192,7 +192,7 @@ body {
   border-radius: 9px;
   background: rgba(16, 26, 33, 0.96);
   box-shadow:
-    0 0 35px rgba(53, 242, 193, 0.08),
+    0 0 35px color-mix(in srgb, var(--accent-color) 8%, transparent),
     0 18px 50px rgba(0, 0, 0, 0.25);
 }
 
@@ -319,7 +319,7 @@ body {
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent-color);
-  box-shadow: 0 12px 35px rgba(53, 242, 193, 0.07);
+  box-shadow: 0 12px 35px color-mix(in srgb, var(--accent-color) 7%, transparent);
 }
 
 .project-card__topline {
@@ -593,7 +593,7 @@ body {
 .site-header__brand {
   position: relative;
   display: inline-block;
-  text-shadow: 0 0 8px rgba(53, 242, 193, 0.28);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color) 28%, transparent);
   animation: brand-flicker 7s infinite;
 }
 .site-header__brand::after {
@@ -705,9 +705,9 @@ body::after {
   display: inline-flex;
   align-items: center;
   padding: 5px 9px;
-  border: 1px solid rgba(53, 242, 193, 0.2);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
   border-radius: 999px;
-  background: rgba(53, 242, 193, 0.055);
+  background: color-mix(in srgb, var(--accent-color) 5.5%, transparent);
   color: #b9d8d1;
   font-size: 0.68rem;
   line-height: 1.35;
@@ -721,11 +721,8 @@ body::after {
 .project-card__actions .button {
   font-size: 0.78rem;
 }
-.project-card__actions .button:hover {
-  transform: translateY(-2px);
-}
 .project-card:hover .project-card__title {
-  text-shadow: 0 0 12px rgba(53, 242, 193, 0.18);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent-color) 18%, transparent);
 }
 .button__icon {
   width: 1.05em;
@@ -767,7 +764,7 @@ body::-webkit-scrollbar-thumb {
 }
 html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
-  background: #8affdf;
+  background: var(--accent-color);
   background-clip: padding-box;
 }
 html::-webkit-scrollbar-button,
@@ -818,13 +815,13 @@ body::-webkit-scrollbar-button:vertical:increment {
 }
 .button:hover .button__icon, .language-toggle:hover .language-toggle__icon,
 .terminal-input button:hover .terminal-submit__icon {
-  transform: translateX(2px);
+  transform: none;
   filter: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(440%) hue-rotate(290deg) brightness(105%);
 }
 .button--primary .button__icon { filter: brightness(0); }
-.button--primary:hover .button__icon { filter: brightness(0) invert(1); }
-.button--secondary .button__icon { filter: brightness(0) saturate(100%) invert(83%) sepia(31%) saturate(1040%) hue-rotate(105deg); }
-.button--secondary:hover .button__icon { filter: brightness(0); }
+.button--primary:hover .button__icon { filter: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(440%) hue-rotate(290deg) brightness(105%); }
+.button--secondary .button__icon, .language-toggle .button__icon, .terminal-input .button__icon { filter: brightness(0) saturate(100%) invert(83%) sepia(31%) saturate(1040%) hue-rotate(105deg); }
+.button--secondary:hover .button__icon, .language-toggle:hover .button__icon, .terminal-input button:hover .button__icon { filter: brightness(0); }
 .hero__title, .page-title { text-decoration: none; }
 .hero__title *, .page-title * { text-decoration: none; }
 .terminal-link-line a { color: var(--accent-color); text-decoration: none; border-bottom: 1px dashed currentColor; }
@@ -842,19 +839,24 @@ body::-webkit-scrollbar-button:vertical:increment {
   50% { transform: translate(-2px, 1px); filter: contrast(1.5); }
   75% { transform: translate(1px, 2px); filter: hue-rotate(-90deg); }
 }
-.terminal-matrix-mode::before {
-  content: "01001010 01010101 01010011 01010100 01000001 01001110 01001111";
-  position: fixed; inset: 0; z-index: 40; pointer-events: none;
-  display: grid; place-items: center; color: #54ff75;
-  font-size: clamp(12px, 2vw, 24px); letter-spacing: .2em;
-  text-shadow: 0 0 12px #00ff48; opacity: .72;
-  animation: matrix-fade 2.6s ease forwards;
+.terminal-matrix { color: var(--accent-color); text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color) 70%, transparent); }
+.terminal-hack-binary { color: var(--accent-color); letter-spacing: .12em; line-height: 1.8; }
+.terminal-hack-caption { color: var(--accent-color); font-weight: 700; letter-spacing: .3em; }
+.matrix-rain { position: fixed; inset: 0; z-index: 45; overflow: hidden; pointer-events: none; opacity: .72; background: color-mix(in srgb, var(--background-color) 28%, transparent); }
+.matrix-rain__column { position: absolute; top: -110%; white-space: pre; color: var(--accent-color); font-size: clamp(10px, 1.2vw, 16px); line-height: 1.35; text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color) 85%, transparent); animation: matrix-rain-fall linear forwards; }
+@keyframes matrix-rain-fall { to { transform: translateY(230vh); } }
+, .terminal-matrix-mode::before { animation: none; }
 }
-.terminal-matrix { color: #54ff75; text-shadow: 0 0 8px #00ff48; }
-@keyframes matrix-fade { 0% { opacity: 0; } 15% { opacity: .8; } 80% { opacity: .8; } 100% { opacity: 0; } }
-.terminal-hack { color: var(--status-color); }
-.language-toggle { display: inline-flex; align-items: center; gap: 7px; }
-.terminal-input button { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; min-height: 28px; }
-@media (prefers-reduced-motion: reduce) {
-  .terminal-glitch, .terminal-matrix-mode::before { animation: none; }
+
+/* Accent-driven surfaces, glows and hover states. */
+body { background-image: radial-gradient(ellipse at 78% 20%, color-mix(in srgb, var(--accent-color) 7%, transparent), transparent 34%); }
+.status-dot, .project-card__indicator { box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 65%, transparent); }
+.button, .button:hover, .project-card__actions .button:hover { transform: none; }
+.button__icon { transition: filter 180ms ease; }
+.button:hover .button__icon { transform: none; }
+:root[data-terminal-theme="pink"] {
+  --accent-color: #ff4f91;
+  --border-color: rgba(255, 79, 145, .25);
+  --status-color: #ff9cbd;
+  --terminal-path-color: #ff8ab5;
 }
