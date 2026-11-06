@@ -1360,20 +1360,20 @@ button,
   }
 }
 
-/* Minimal project glyph: fixed visual proportions, responsive placement. */
+/* Project glyphs: prominent corner marks with responsive sizing. */
 .project-card__main {
   min-width: 0;
-  padding-right: 44px;
+  padding-right: 108px;
 }
 .project-card__glyph {
   position: absolute;
   z-index: 0;
-  top: 58px;
-  right: 20px;
+  top: 52px;
+  right: 22px;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 112px;
+  height: 112px;
   color: var(--accent-color);
   opacity: 0.62;
   pointer-events: none;
@@ -1383,7 +1383,7 @@ button,
   display: block;
   width: 100%;
   height: 100%;
-  max-width: 30px;
+  max-width: 112px;
   overflow: visible;
   filter: none;
 }
@@ -1393,45 +1393,61 @@ button,
 
 @media (max-width: 960px) {
   .project-card__main {
-    padding-right: 42px;
+    padding-right: 94px;
   }
   .project-card__glyph {
-    top: 56px;
+    top: 54px;
     right: 18px;
-    width: 28px;
-    height: 28px;
+    width: 92px;
+    height: 92px;
   }
   .project-card__glyph .project-art {
-    max-width: 28px;
+    max-width: 92px;
+  }
+}
+
+@media (max-width: 760px) {
+  .project-card__main {
+    padding-right: 88px;
+  }
+  .project-card__glyph {
+    top: 54px;
+    right: 18px;
+    width: 84px;
+    height: 84px;
+  }
+  .project-card__glyph .project-art {
+    max-width: 84px;
   }
 }
 
 @media (max-width: 520px) {
   .project-card__main {
-    padding-right: 38px;
+    padding-right: 76px;
   }
   .project-card__glyph {
-    top: 62px;
-    right: 15px;
-    width: 26px;
-    height: 26px;
+    top: 60px;
+    right: 14px;
+    width: 72px;
+    height: 72px;
   }
   .project-card__glyph .project-art {
-    max-width: 26px;
+    max-width: 72px;
   }
 }
 
 @media (max-width: 360px) {
   .project-card__main {
-    padding-right: 34px;
+    padding-right: 66px;
   }
   .project-card__glyph {
-    right: 12px;
-    width: 24px;
-    height: 24px;
+    top: 58px;
+    right: 10px;
+    width: 62px;
+    height: 62px;
   }
   .project-card__glyph .project-art {
-    max-width: 24px;
+    max-width: 62px;
   }
 }
 
