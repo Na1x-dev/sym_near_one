@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document
       .querySelectorAll("[data-language-toggle]")
       .forEach(function (button) {
-        button.textContent = language === "en" ? "RU" : "EN";
+        button.innerHTML = '<img class="button__icon" src="' + base + 'sources/icons/language.svg" alt="" aria-hidden="true" />' + (language === "en" ? "RU" : "EN");
         button.setAttribute(
           "aria-label",
           language === "en" ? "Switch to Russian" : "Switch to English",
@@ -274,7 +274,6 @@ document.addEventListener("DOMContentLoaded", function () {
               "  stack      Show the technology stack",
               "  projects   List projects",
               "  open NAME  Open a project page",
-              "  contact    Show GitHub link",
               "  links      Useful profile links",
               "  matrix     Matrix visual effect",
               "  hack the pentagon  Display NICE TRY in binary",
