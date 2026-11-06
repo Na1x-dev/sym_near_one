@@ -84,18 +84,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (p.statusNote) return text(p.statusNote, p.statusNoteRu);
     return text("In development", "В разработке");
   }
-  // Each project gets its own inline SVG so it inherits the active theme color.
+  // Minimal project glyphs: compact line icons that inherit the active accent color.
   function projectArtwork(id) {
     var drawings = {
-      "techmatcher": '<rect x="70" y="20" width="92" height="142" rx="15"/><rect x="80" y="34" width="72" height="100" rx="5"/><circle cx="116" cy="146" r="5"/><path d="M94 55h44M94 67h28M94 91h44M94 103h34"/><path d="m184 42 5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/>',
-      "ai-content-helper": '<path d="M35 45Q35 30 50 30h112q15 0 15 15v67q0 15-15 15H91l-30 23v-23h-11q-15 0-15-15z"/><path d="M67 66h78M67 86h60M67 106h42"/><path d="m192 34 7 16 16 7-16 7-7 16-7-16-16-7 16-7z"/><path d="m207 104 4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/>',
-      "audio-visualizer": '<path d="M28 91h18l12-30 14 68 16-96 17 112 17-84 15 59 15-42 13 13h34"/><path d="M30 145h180" opacity=".35"/><circle cx="116" cy="91" r="74" opacity=".16"/><circle cx="116" cy="91" r="58" opacity=".25"/>',
-      "ascii-video-player": '<rect x="25" y="25" width="182" height="132" rx="9"/><path d="M25 52h182"/><circle cx="43" cy="39" r="3"/><circle cx="55" cy="39" r="3"/><circle cx="67" cy="39" r="3"/><path d="m96 78 35 24-35 24z"/><path d="M43 68h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8M43 139h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8m8 0h8" opacity=".65"/>',
-      "astrotrails": '<circle cx="116" cy="91" r="12"/><path d="M116 79C143 24 193 22 198 55c5 31-47 57-82 48-42-10-70-49-47-70 18-16 47-2 62 15"/><path d="M116 79C94 42 57 36 43 59c-13 21 12 55 46 65 38 11 80-3 87-31" opacity=".55"/><path d="m183 28 4 11 11 4-11 4-4 11-4-11-11-4 11-4zM48 121l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>',
-      "wedding-card": '<rect x="42" y="25" width="148" height="132" rx="5"/><rect x="52" y="35" width="128" height="112" rx="2" opacity=".45"/><path d="M116 63c-18-23-43-2-25 18l25 25 25-25c18-20-7-41-25-18z"/><path d="M116 106v22M91 128h50"/><path d="M70 54c9-9 17-9 25 0M137 54c9-9 17-9 25 0" opacity=".65"/>',
-      "voice-avatar": '<path d="M116 35c-29 0-48 22-48 51v14c0 15 9 27 21 34l-9 19h72l-9-19c12-7 21-19 21-34V86c0-29-19-51-48-51z"/><path d="M91 92q10-9 20 0M121 92q10-9 20 0M101 112q15 13 30 0"/><path d="M35 82h17l10-18 12 54 13-31M197 82h-17l-10-18-12 54-13-31" opacity=".8"/><path d="M116 19v-9m-64 30-7-7m135 7 7-7" opacity=".45"/>'
+      "techmatcher": '<rect x="7" y="3" width="16" height="26" rx="3"/><path d="M11 7h8M11 22h8"/>',
+      "ai-content-helper": '<path d="M5 6h22v15H15l-6 5v-5H5z"/><path d="M10 11h12M10 16h8"/>',
+      "audio-visualizer": '<path d="M3 16h3l3-8 4 16 4-19 4 15 3-8 3 4h4"/>',
+      "ascii-video-player": '<rect x="3" y="5" width="26" height="20" rx="3"/><path d="m13 10 8 5-8 5z"/>',
+      "astrotrails": '<path d="m16 3 2.2 7.1L25 13l-6.8 2.8L16 23l-2.2-7.2L7 13l6.8-2.9z"/><path d="m27 22 .9 2.8 2.6 1.1-2.6 1-.9 2.7-.9-2.7-2.6-1 2.6-1.1zM5 3l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/>',
+      "wedding-card": '<path d="M16 27S3 19 3 10.5C3 4 11 2 16 9c5-7 13-5 13 1.5C29 19 16 27 16 27z"/>',
+      "voice-avatar": '<circle cx="16" cy="10" r="6"/><path d="M5 29c0-6 5-10 11-10s11 4 11 10"/>'
     };
-    return '<svg class="project-art project-art--' + esc(id) + '" viewBox="0 0 232 182" fill="none" stroke="var(--accent-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g>' + (drawings[id] || drawings["techmatcher"]) + '</g></svg>';
+    return '<svg class="project-art project-art--' + esc(id) + '" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g>' + (drawings[id] || drawings["techmatcher"]) + '</g></svg>';
   }
   function card(p) {
     var category = text(p.category, p.categoryRu);
@@ -111,10 +111,10 @@ document.addEventListener("DOMContentLoaded", function () {
       '<div class="project-card__topline"><span>' + esc(p.number + " / " + category) +
       '</span><span class="project-status project-status--' + esc(p.status) + '">' +
       esc(statusLabel(p)) + '</span></div>' +
-      '<div class="project-card__art-wrap">' + projectArtwork(p.id) + '</div>' +
       '<div class="project-card__main"><h2 class="project-card__title">' +
       esc(p.title) + "</h2>" +
       '<p class="project-card__description">' + esc(description) + "</p></div>" +
+      '<span class="project-card__glyph">' + projectArtwork(p.id) + '</span>' +
       '<div class="project-card__meta"><span class="project-card__meta-label">' +
       esc(text("TECH STACK", "ТЕХНОЛОГИИ")) + '</span><div class="project-card__stack">' +
       stack + "</div></div>" +
@@ -153,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
       '<span class="hero__cursor">_</span></h1>' +
       '<div class="detail-status-row"><span class="project-status project-status--' + esc(p.status) + '">' +
       esc(statusLabel(p)) + '</span></div>' +
-      '<div class="detail-art-wrap">' + projectArtwork(p.id) + '</div>' +
       '<section class="detail-overview"><div><p class="detail-overview__label">' +
       esc(text("PROJECT OVERVIEW", "О ПРОЕКТЕ")) +
       '</p><p class="detail-overview__text">' +
