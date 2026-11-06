@@ -7,11 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var savedTheme = "default";
   try {
-    savedTheme = window.localStorage.getItem("portfolio-theme") === "pink" ? "pink" : "default";
+    savedTheme =
+      window.localStorage.getItem("portfolio-theme") === "pink"
+        ? "pink"
+        : "default";
   } catch (error) {
     savedTheme = "default";
   }
-  if (savedTheme === "pink") document.documentElement.dataset.terminalTheme = "pink";
+  if (savedTheme === "pink")
+    document.documentElement.dataset.terminalTheme = "pink";
   else delete document.documentElement.dataset.terminalTheme;
 
   function esc(value) {
@@ -39,7 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document
       .querySelectorAll("[data-language-toggle]")
       .forEach(function (button) {
-        button.innerHTML = '<img class="button__icon" src="' + base + 'sources/icons/language.svg" alt="" aria-hidden="true" />' + (language === "en" ? "RU" : "EN");
+        button.innerHTML =
+          '<img class="button__icon" src="' +
+          base +
+          'sources/icons/language.svg" alt="" aria-hidden="true" />' +
+          (language === "en" ? "RU" : "EN");
         button.setAttribute(
           "aria-label",
           language === "en" ? "Switch to Russian" : "Switch to English",
@@ -206,8 +214,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   var profileLinks = {
     github: "https://github.com/Na1x-dev",
-    email: "",
-    linkedin: ""
+    email: "na1x.1024@gmail.com",
+    linkedin: "https://www.linkedin.com/in/symnearone/",
   };
   function setTheme(theme) {
     var nextTheme = theme === "pink" ? "pink" : "default";
@@ -217,13 +225,19 @@ document.addEventListener("DOMContentLoaded", function () {
       delete document.documentElement.dataset.terminalTheme;
     }
     try {
-      if (nextTheme === "pink") window.localStorage.setItem("portfolio-theme", "pink");
+      if (nextTheme === "pink")
+        window.localStorage.setItem("portfolio-theme", "pink");
       else window.localStorage.removeItem("portfolio-theme");
     } catch (error) {
       // The current page still changes theme if storage is unavailable.
     }
-    line(text("Theme switched to " + nextTheme + ".", "Цветовая тема изменена: " + nextTheme + "."),
-      "terminal-output--success");
+    line(
+      text(
+        "Theme switched to " + nextTheme + ".",
+        "Цветовая тема изменена: " + nextTheme + ".",
+      ),
+      "terminal-output--success",
+    );
   }
   function runGlitch() {
     document.body.classList.remove("terminal-glitch");
@@ -232,7 +246,12 @@ document.addEventListener("DOMContentLoaded", function () {
     window.setTimeout(function () {
       document.body.classList.remove("terminal-glitch");
     }, 1400);
-    line(text("Visual interference detected. Signal restored.", "Обнаружены помехи. Сигнал восстановлен."));
+    line(
+      text(
+        "Visual interference detected. Signal restored.",
+        "Обнаружены помехи. Сигнал восстановлен.",
+      ),
+    );
   }
   function runMatrix() {
     var overlay = document.createElement("div");
@@ -243,20 +262,32 @@ document.addEventListener("DOMContentLoaded", function () {
       var stream = document.createElement("span");
       stream.className = "matrix-rain__column";
       stream.style.left = (column / 22) * 100 + "%";
-      stream.style.animationDelay = (Math.random() * -2.8) + "s";
-      stream.style.animationDuration = (2.2 + Math.random() * 2.2) + "s";
+      stream.style.animationDelay = Math.random() * -2.8 + "s";
+      stream.style.animationDuration = 2.2 + Math.random() * 2.2 + "s";
       var chars = "";
-      for (var row = 0; row < 18; row += 1) chars += glyphs.charAt(Math.floor(Math.random() * glyphs.length)) + "\n";
+      for (var row = 0; row < 18; row += 1)
+        chars +=
+          glyphs.charAt(Math.floor(Math.random() * glyphs.length)) + "\n";
       stream.textContent = chars;
       overlay.appendChild(stream);
     }
     document.body.appendChild(overlay);
-    window.setTimeout(function () { overlay.remove(); }, 4200);
-    line(text("Wake up, Neo... The Matrix has you.", "Проснись, Нео... Матрица уже здесь."), "terminal-matrix");
+    window.setTimeout(function () {
+      overlay.remove();
+    }, 4200);
+    line(
+      text(
+        "Wake up, Neo... The Matrix has you.",
+        "Проснись, Нео... Матрица уже здесь.",
+      ),
+      "terminal-matrix",
+    );
   }
   function runHackThePentagon() {
-    line("01001110 01001001 01000011 01000101 00100000 01010100 01010010 01011001", "terminal-hack-binary");
-    line("NICE TRY", "terminal-hack-caption");
+    line(
+      "01001110 01001001 01000011 01000101 00100000 01010100 01010010 01011001",
+      "terminal-hack-binary",
+    );
   }
   form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -281,11 +312,10 @@ document.addEventListener("DOMContentLoaded", function () {
               "  projects   список проектов",
               "  open NAME  открыть проект",
               "  links      полезные ссылки",
-              "  matrix     эффект Matrix",
-              "  hack the pentagon  NICE TRY в двоичном виде",
+              "  matrix",
+              "  hack the pentagon",
               "  pink       красно-розовая тема",
               "  green      вернуть исходную тему",
-              "  glitch     визуальный glitch",
               "  date       дата и время",
               "  clear      очистить терминал",
             ]
@@ -297,11 +327,10 @@ document.addEventListener("DOMContentLoaded", function () {
               "  projects   List projects",
               "  open NAME  Open a project page",
               "  links      Useful profile links",
-              "  matrix     Matrix visual effect",
-              "  hack the pentagon  Display NICE TRY in binary",
+              "  matrix",
+              "  hack the pentagon",
               "  pink       Red-pink color theme",
               "  green      Restore original theme",
-              "  glitch     Visual glitch effect",
               "  date       Show date and time",
               "  clear      Clear the terminal",
             ],
@@ -348,17 +377,48 @@ document.addEventListener("DOMContentLoaded", function () {
     if (command === "links") {
       line(text("Useful links:", "Полезные ссылки:"));
       linkLine("GitHub — Na1x-dev", profileLinks.github);
-      if (profileLinks.email) linkLine("Email — " + profileLinks.email, "mailto:" + profileLinks.email);
-      else line(text("Email: add your address to profileLinks.email in script.js", "Email: добавь адрес в profileLinks.email в script.js"));
+      if (profileLinks.email)
+        linkLine(
+          "Email — " + profileLinks.email,
+          "mailto:" + profileLinks.email,
+        );
+      else
+        line(
+          text(
+            "Email: add your address to profileLinks.email in script.js",
+            "Email: добавь адрес в profileLinks.email в script.js",
+          ),
+        );
       if (profileLinks.linkedin) linkLine("LinkedIn", profileLinks.linkedin);
-      else line(text("LinkedIn: add your profile URL to profileLinks.linkedin in script.js", "LinkedIn: добавь ссылку в profileLinks.linkedin в script.js"));
+      else
+        line(
+          text(
+            "LinkedIn: add your profile URL to profileLinks.linkedin in script.js",
+            "LinkedIn: добавь ссылку в profileLinks.linkedin в script.js",
+          ),
+        );
       return;
     }
-    if (command === "pink") { setTheme("pink"); return; }
-    if (command === "green") { setTheme("default"); return; }
-    if (command === "glitch") { runGlitch(); return; }
-    if (command === "matrix") { runMatrix(); return; }
-    if (raw.toLowerCase().replace(/\s+/g, " ").trim() === "hack the pentagon") { runHackThePentagon(); return; }
+    if (command === "pink") {
+      setTheme("pink");
+      return;
+    }
+    if (command === "green") {
+      setTheme("default");
+      return;
+    }
+    if (command === "glitch") {
+      runGlitch();
+      return;
+    }
+    if (command === "matrix") {
+      runMatrix();
+      return;
+    }
+    if (raw.toLowerCase().replace(/\s+/g, " ").trim() === "hack the pentagon") {
+      runHackThePentagon();
+      return;
+    }
     if (command === "date") {
       line(new Date().toLocaleString(language === "ru" ? "ru-RU" : "en-GB"));
       return;
