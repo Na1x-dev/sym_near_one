@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
     language = next;
     document.documentElement.lang = language;
     document.querySelectorAll("[data-en][data-ru]").forEach(function (el) {
+      var icon = el.querySelector(".button__icon");
       el.textContent = text(el.dataset.en, el.dataset.ru);
+      if (icon) el.insertBefore(icon, el.firstChild);
     });
     document
       .querySelectorAll("[data-language-toggle]")
