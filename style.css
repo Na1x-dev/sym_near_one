@@ -708,7 +708,7 @@ body::after {
   border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent-color) 5.5%, transparent);
-  color: #b9d8d1;
+  color: var(--muted-color);
   font-size: 0.68rem;
   line-height: 1.35;
 }
@@ -845,7 +845,6 @@ body::-webkit-scrollbar-button:vertical:increment {
 .matrix-rain { position: fixed; inset: 0; z-index: 45; overflow: hidden; pointer-events: none; opacity: .72; background: color-mix(in srgb, var(--background-color) 28%, transparent); }
 .matrix-rain__column { position: absolute; top: -110%; white-space: pre; color: var(--accent-color); font-size: clamp(10px, 1.2vw, 16px); line-height: 1.35; text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color) 85%, transparent); animation: matrix-rain-fall linear forwards; }
 @keyframes matrix-rain-fall { to { transform: translateY(230vh); } }
-}
 @media (prefers-reduced-motion: reduce) { .matrix-rain { display: none; } }
 
 /* Accent-driven surfaces, glows and hover states. */
