@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return item.id === root.dataset.projectDetail;
     });
     if (!p) {
-      root.textContent = "Project information could not be found.";
+      root.textContent = text("Project information could not be found.", "Информация о проекте не найдена.");
       return;
     }
     var description = text(p.description, p.descriptionRu);
@@ -152,25 +152,23 @@ document.addEventListener("DOMContentLoaded", function () {
       esc(p.number + " — " + text(p.category, p.categoryRu)) +
       '</p><h1 class="page-title">' +
       esc(p.title) +
-      '<span class="hero__cursor">_</span></h1><p class="page-lead">' +
+      '<span class="hero__cursor">_</span></h1>' +
+      '<section class="detail-overview"><div><p class="detail-overview__label">' +
+      esc(text("PROJECT OVERVIEW", "О ПРОЕКТЕ")) +
+      '</p><p class="detail-overview__text">' +
       esc(description) +
-      '</p><div class="detail-layout"><section class="detail-panel"><h2 class="detail-panel__title">' +
+      '</p></div><span class="detail-index" aria-hidden="true">' +
+      esc(p.number) +
+      '</span></section>' +
+      '<div class="detail-layout"><section class="detail-panel"><h2 class="detail-panel__title">' +
       esc(text("What it does", "Возможности")) +
       '</h2><ul class="feature-list">' +
-      features
-        .map(function (f) {
-          return "<li>" + esc(f) + "</li>";
-        })
-        .join("") +
+      features.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") +
       '</ul></section><section class="detail-panel"><h2 class="detail-panel__title">' +
-      esc(text("Technology stack", "Технологический стек")) +
+      esc(text("Built with", "Технологии")) +
       '</h2><ul class="stack-list">' +
-      p.stack
-        .map(function (s) {
-          return "<li>" + esc(s) + "</li>";
-        })
-        .join("") +
-      '</ul></section></div><div class="hero__actions"><a class="button button--primary" href="' +
+      p.stack.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") +
+      '</ul></section></div><div class="hero__actions detail-actions"><a class="button button--primary" href="' +
       esc(p.github) +
       '" target="_blank" rel="noreferrer"><img class="button__icon" src="' +
       esc(base + "sources/icons/github.svg") +
