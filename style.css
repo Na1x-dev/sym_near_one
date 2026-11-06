@@ -1375,7 +1375,7 @@ button,
   width: 112px;
   height: 112px;
   color: var(--accent-color);
-  opacity: 0.62;
+  opacity: 0.22;
   pointer-events: none;
   transition: opacity 180ms ease;
 }
