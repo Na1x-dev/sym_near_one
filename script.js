@@ -212,33 +212,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1400);
     line(text("Visual interference detected. Signal restored.", "Обнаружены помехи. Сигнал восстановлен."));
   }
-  function runHack() {
-    var messages = language === "ru"
-      ? ["Инициализация безопасного соединения...", "Сканирование портов...", "Обход воображаемого файрвола...", "Доступ получен. Шутка — это портфолио 😎"]
-      : ["Initializing secure connection...", "Scanning ports...", "Bypassing imaginary firewall...", "Access granted. Just kidding — it's a portfolio 😎"];
-    var p = document.createElement("p");
-    p.className = "terminal-output terminal-hack";
-    output.appendChild(p);
-    var i = 0;
-    function step() {
-      p.textContent = messages[i];
-      output.scrollTop = output.scrollHeight;
-      i += 1;
-      if (i < messages.length) window.setTimeout(step, 650);
-      else p.classList.add("terminal-output--success");
-    }
-    step();
-  }
   function runMatrix() {
-    var p = document.createElement("p");
-    p.className = "terminal-output terminal-matrix";
-    p.textContent = "01001000 01000001 01000011 01001011 01000101 01010010  ░▒▓█";
-    output.appendChild(p);
-    document.body.classList.add("terminal-matrix-mode");
-    window.setTimeout(function () {
-      document.body.classList.remove("terminal-matrix-mode");
-    }, 2600);
-    output.scrollTop = output.scrollHeight;
+    var overlay = document.createElement("div");
+    overlay.className = "matrix-rain";
+    overlay.setAttribute("aria-hidden", "true");
+    var glyphs = "アイウエオカキクケコサシスセソタチツテトナニヌネノ012345789";
+    for (var column = 0; column < 22; column += 1) {
+      var stream = document.createElement("span");
+      stream.className = "matrix-rain__column";
+      stream.style.left = (column / 22) * 100 + "%";
+      stream.style.animationDelay = (Math.random() * -2.8) + "s";
+      stream.style.animationDuration = (2.2 + Math.random() * 2.2) + "s";
+      var chars = "";
+      for (var row = 0; row < 18; row += 1) chars += glyphs.charAt(Math.floor(Math.random() * glyphs.length)) + "\n";
+      stream.textContent = chars;
+      overlay.appendChild(stream);
+    }
+    document.body.appendChild(overlay);
+    window.setTimeout(function () { overlay.remove(); }, 4200);
+    line(text("Wake up, Neo... The Matrix has you.", "Проснись, Нео... Матрица уже здесь."), "terminal-matrix");
+  }
+  function runHackThePentagon() {
+    line("01001110 01001001 01000011 01000101 00100000 01010100 01010010 01011001", "terminal-hack-binary");
+    line("NICE TRY", "terminal-hack-caption");
   }
   form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -262,15 +258,13 @@ document.addEventListener("DOMContentLoaded", function () {
               "  stack      технологии",
               "  projects   список проектов",
               "  open NAME  открыть проект",
-              "  contact    GitHub",
               "  links      полезные ссылки",
               "  matrix     эффект Matrix",
-              "  hack       симуляция взлома",
+              "  hack the pentagon  NICE TRY в двоичном виде",
               "  pink       красно-розовая тема",
               "  green      вернуть исходную тему",
               "  glitch     визуальный glitch",
               "  date       дата и время",
-              "  sudo       секретная команда",
               "  clear      очистить терминал",
             ]
           : [
@@ -283,12 +277,11 @@ document.addEventListener("DOMContentLoaded", function () {
               "  contact    Show GitHub link",
               "  links      Useful profile links",
               "  matrix     Matrix visual effect",
-              "  hack       Simulated hacking sequence",
+              "  hack the pentagon  Display NICE TRY in binary",
               "  pink       Red-pink color theme",
               "  green      Restore original theme",
               "  glitch     Visual glitch effect",
               "  date       Show date and time",
-              "  sudo       A secret command",
               "  clear      Clear the terminal",
             ],
       whoami:
@@ -309,7 +302,6 @@ document.addEventListener("DOMContentLoaded", function () {
       projects: projects.map(function (p) {
         return p.id + " — " + p.title;
       }),
-      contact: ["GitHub: https://github.com/Na1x-dev"],
     };
     if (command === "open") {
       var requested = parts.join(" ").toLowerCase();
@@ -345,21 +337,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (command === "green") { setTheme("default"); return; }
     if (command === "glitch") { runGlitch(); return; }
     if (command === "matrix") { runMatrix(); return; }
-    if (command === "hack") { runHack(); return; }
+    if (raw.toLowerCase().replace(/\s+/g, " ").trim() === "hack the pentagon") { runHackThePentagon(); return; }
     if (command === "date") {
       line(new Date().toLocaleString(language === "ru" ? "ru-RU" : "en-GB"));
-      return;
-    }
-    if (command === "sudo") {
-      line(text("Nice try. You already have root access to this portfolio. 😏", "Хорошая попытка. У тебя уже есть root-доступ к этому портфолио. 😏"));
-      return;
-    }
-    if (command === "status") {
-      line(
-        language === "ru"
-          ? "Терминал портфолио готов к работе."
-          : "Portfolio terminal ready.",
-      );
       return;
     }
     if (responses[command])
