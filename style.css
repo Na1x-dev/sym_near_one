@@ -4,7 +4,7 @@
   --accent-color: #35f2c1;
   --background-color: #080d12;
   --surface-color: #101a21;
-  --status-color: #8bff8a;
+  --status-color: var(--accent-color);
   --muted-color: #a8bac5;
   --border-color: color-mix(in srgb, var(--accent-color) 22%, transparent);
   --terminal-path-color: #0061bb;
@@ -845,8 +845,8 @@ body::-webkit-scrollbar-button:vertical:increment {
 .matrix-rain { position: fixed; inset: 0; z-index: 45; overflow: hidden; pointer-events: none; opacity: .72; background: color-mix(in srgb, var(--background-color) 28%, transparent); }
 .matrix-rain__column { position: absolute; top: -110%; white-space: pre; color: var(--accent-color); font-size: clamp(10px, 1.2vw, 16px); line-height: 1.35; text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color) 85%, transparent); animation: matrix-rain-fall linear forwards; }
 @keyframes matrix-rain-fall { to { transform: translateY(230vh); } }
-, .terminal-matrix-mode::before { animation: none; }
 }
+@media (prefers-reduced-motion: reduce) { .matrix-rain { display: none; } }
 
 /* Accent-driven surfaces, glows and hover states. */
 body { background-image: radial-gradient(ellipse at 78% 20%, color-mix(in srgb, var(--accent-color) 7%, transparent), transparent 34%); }
@@ -860,3 +860,15 @@ body { background-image: radial-gradient(ellipse at 78% 20%, color-mix(in srgb, 
   --status-color: #ff9cbd;
   --terminal-path-color: #ff8ab5;
 }
+
+/* Theme-aware SVG recoloring for every shared and generated icon. */
+:root { --accent-icon-filter: brightness(0) saturate(100%) invert(83%) sepia(31%) saturate(1040%) hue-rotate(105deg); }
+:root[data-terminal-theme="pink"] { --accent-icon-filter: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(440%) hue-rotate(290deg) brightness(105%); }
+.button--secondary .button__icon, .language-toggle .button__icon,
+.terminal-input .button__icon, .text-link .button__icon,
+.project-card__title-icon { filter: var(--accent-icon-filter); }
+.button--primary:hover .button__icon { filter: var(--accent-icon-filter); }
+.button--secondary:hover .button__icon,
+.language-toggle:hover .button__icon,
+.terminal-input button:hover .button__icon { filter: brightness(0); }
+.text-link:hover .button__icon { filter: var(--accent-icon-filter); }
