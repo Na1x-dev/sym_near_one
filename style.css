@@ -684,10 +684,10 @@ button, .button, .language-toggle { touch-action: manipulation; }
 .project-card:hover .project-card__glyph { opacity: .95; }
 @media (max-width: 760px) {
   .project-card { padding-right: 62px; }
-  .project-card__glyph { top: 18px; right: 18px; }
+  .project-card__glyph { top: 58px; right: 18px; }
 }
 @media (max-width: 520px) {
   .project-card { padding-right: 58px; }
-  .project-card__glyph { top: 15px; right: 15px; width: 26px; height: 26px; }
+  .project-card__glyph { top: 62px; right: 15px; width: 26px; height: 26px; }
   .project-card__glyph .project-art { width: 26px; height: 26px; }
 }
