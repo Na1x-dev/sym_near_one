@@ -5,6 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
   var onDetailPage = window.location.pathname.indexOf("/projects/") !== -1;
   var base = onDetailPage ? "../" : "";
 
+  var savedTheme = "default";
+  try {
+    savedTheme = window.localStorage.getItem("portfolio-theme") === "pink" ? "pink" : "default";
+  } catch (error) {
+    savedTheme = "default";
+  }
+  if (savedTheme === "pink") document.documentElement.dataset.terminalTheme = "pink";
+  else delete document.documentElement.dataset.terminalTheme;
+
   function esc(value) {
     return String(value).replace(/[&<>"']/g, function (c) {
       return {
@@ -201,8 +210,19 @@ document.addEventListener("DOMContentLoaded", function () {
     linkedin: ""
   };
   function setTheme(theme) {
-    document.documentElement.dataset.terminalTheme = theme;
-    line(text("Theme switched to " + theme + ".", "Цветовая тема изменена: " + theme + "."),
+    var nextTheme = theme === "pink" ? "pink" : "default";
+    if (nextTheme === "pink") {
+      document.documentElement.dataset.terminalTheme = "pink";
+    } else {
+      delete document.documentElement.dataset.terminalTheme;
+    }
+    try {
+      if (nextTheme === "pink") window.localStorage.setItem("portfolio-theme", "pink");
+      else window.localStorage.removeItem("portfolio-theme");
+    } catch (error) {
+      // The current page still changes theme if storage is unavailable.
+    }
+    line(text("Theme switched to " + nextTheme + ".", "Цветовая тема изменена: " + nextTheme + "."),
       "terminal-output--success");
   }
   function runGlitch() {
