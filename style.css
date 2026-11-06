@@ -461,3 +461,36 @@ body::after {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .site-header__brand, .matrix-rain { animation: none; }
 }
+
+
+/* Project lifecycle labels */
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 5px 9px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--muted-color);
+  font-size: .65rem;
+  line-height: 1.3;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.project-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.project-status--released { color: var(--accent-color); }
+.project-status--in-development { color: #e8b45d; border-color: color-mix(in srgb, #e8b45d 35%, transparent); }
+.project-status--nearly-ready { color: #7bd9a8; border-color: color-mix(in srgb, #7bd9a8 35%, transparent); }
+.detail-status-row { display: flex; margin: 10px 0 0; }
+@media (max-width: 760px) {
+  .project-card__topline { align-items: flex-start; gap: 10px; }
+  .project-status { white-space: normal; text-align: right; }
+}
