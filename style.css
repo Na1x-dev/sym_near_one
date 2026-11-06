@@ -816,7 +816,7 @@ body::-webkit-scrollbar-button:vertical:increment {
 .button:hover .button__icon, .language-toggle:hover .language-toggle__icon,
 .terminal-input button:hover .terminal-submit__icon {
   transform: none;
-  filter: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(440%) hue-rotate(290deg) brightness(105%);
+  filter: brightness(0) saturate(100%) invert(15%) sepia(99%) saturate(7495%) hue-rotate(327deg) brightness(90%) contrast(110%);
 }
 .button--primary .button__icon { filter: brightness(0); }
 .button--primary:hover .button__icon { filter: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(440%) hue-rotate(290deg) brightness(105%); }
@@ -827,10 +827,10 @@ body::-webkit-scrollbar-button:vertical:increment {
 .terminal-link-line a { color: var(--accent-color); text-decoration: none; border-bottom: 1px dashed currentColor; }
 .terminal-link-line a:hover { color: #fff; }
 :root[data-terminal-theme="pink"] {
-  --accent-color: #ff4f91;
-  --border-color: rgba(255, 79, 145, .25);
-  --status-color: #ff9cbd;
-  --terminal-path-color: #ff8ab5;
+  --accent-color: #e60067;
+  --border-color: rgba(230, 0, 103, .25);
+  --status-color: #ff70a8;
+  --terminal-path-color: #ff70a8;
 }
 .terminal-glitch { animation: terminal-glitch 140ms steps(2, end) 8; }
 @keyframes terminal-glitch {
@@ -871,3 +871,21 @@ body { background-image: radial-gradient(ellipse at 78% 20%, color-mix(in srgb, 
 .language-toggle:hover .button__icon,
 .terminal-input button:hover .button__icon { filter: brightness(0); }
 .text-link:hover .button__icon { filter: var(--accent-icon-filter); }
+
+/* Keep the language switch icon optically centered beside its label. */
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  line-height: 1;
+  vertical-align: middle;
+}
+.language-toggle .button__icon {
+  display: block;
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  margin: 0;
+  vertical-align: middle;
+}
