@@ -657,3 +657,37 @@ button, .button, .language-toggle { touch-action: manipulation; }
   .project-card:hover { box-shadow: none; }
   .project-card:hover .project-art { transform: none; }
 }
+
+
+/* Minimal, understated project glyph in the upper-right corner of each card. */
+.project-card { padding-right: 66px; }
+.project-card__glyph {
+  position: absolute;
+  z-index: 0;
+  top: 22px;
+  right: 22px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: var(--accent-color);
+  opacity: .62;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.project-card__glyph .project-art {
+  display: block;
+  width: 30px;
+  height: 30px;
+  filter: none;
+}
+.project-card:hover .project-card__glyph { opacity: .95; }
+@media (max-width: 760px) {
+  .project-card { padding-right: 62px; }
+  .project-card__glyph { top: 18px; right: 18px; }
+}
+@media (max-width: 520px) {
+  .project-card { padding-right: 58px; }
+  .project-card__glyph { top: 15px; right: 15px; width: 26px; height: 26px; }
+  .project-card__glyph .project-art { width: 26px; height: 26px; }
+}
