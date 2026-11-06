@@ -3,6 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("is-loading");
+        try {
+          var theme = localStorage.getItem("portfolio-theme");
+          var language = localStorage.getItem("portfolio-language");
+          if (theme === "pink") root.dataset.terminalTheme = "pink";
+          else delete root.dataset.terminalTheme;
+          root.lang = language === "ru" ? "ru" : "en";
+        } catch (error) {
+          root.lang = "en";
+        }
+      })();
+    </script>
     <meta name="theme-color" content="#080d12" />
     <meta
       name="description"
