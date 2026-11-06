@@ -196,6 +196,30 @@ document.addEventListener("DOMContentLoaded", function () {
   var input = document.querySelector("#terminal-command");
   var output = document.querySelector("#terminal-output");
   if (!form || !input || !output) return;
+
+  // Keep a shell-like command history for the current page session.
+  var commandHistory = [];
+  var historyIndex = 0;
+  var historyDraft = "";
+  input.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowUp") {
+      if (!commandHistory.length) return;
+      event.preventDefault();
+      if (historyIndex === commandHistory.length) historyDraft = input.value;
+      historyIndex = Math.max(0, historyIndex - 1);
+      input.value = commandHistory[historyIndex];
+      input.setSelectionRange(input.value.length, input.value.length);
+    } else if (event.key === "ArrowDown") {
+      if (!commandHistory.length || historyIndex === commandHistory.length) return;
+      event.preventDefault();
+      historyIndex = Math.min(commandHistory.length, historyIndex + 1);
+      input.value =
+        historyIndex === commandHistory.length
+          ? historyDraft
+          : commandHistory[historyIndex];
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  });
   function line(value, cls) {
     var p = document.createElement("p");
     p.className = cls || "terminal-output";
@@ -296,6 +320,9 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     var raw = input.value.trim();
     if (!raw) return;
+    commandHistory.push(raw);
+    historyIndex = commandHistory.length;
+    historyDraft = "";
     line("user@portfolio:~$ " + raw, "terminal-command-line");
     input.value = "";
     var parts = raw.split(/\s+/);
