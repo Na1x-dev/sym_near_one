@@ -1,119 +1,147 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sym_near_one</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Твой CRT лоадер системы -->
-    <div id="cyber-loader">
-        <!-- Внедрено: Фоновая сетка для экрана загрузки -->
-        <div class="global-hud-grid"></div>
-        
-        <div class="loader-content">
-            <div class="loader-brand">[CORE_SYS]_LOADING...</div>
-            <div class="loader-bar-wrapper">
-                <div class="loader-bar-fill"></div>
-            </div>
-            <div class="loader-status">INIT_SEQUENCE_START</div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d12" />
+    <meta
+      name="description"
+      content="Andrew — full-stack developer building web applications."
+    />
+    <title>[symnearone]</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="projects-data.js" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="sources/favicon.svg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-header__brand" href="index.html">[sym_near_one.run]</a>
+      <button class="language-toggle" type="button" data-language-toggle aria-label="Switch language">
+        <img class="button__icon" src="sources/icons/language.svg" alt="" aria-hidden="true" />RU
+      </button>
+    </header>
+    <main class="page-main">
+      <div class="section-divider" aria-hidden="true"></div>
+      <section class="hero">
+        <div class="hero__content">
+          <p
+            class="hero__eyebrow"
+            data-en="// FULL-STACK DEVELOPER / PORTFOLIO"
+            data-ru="// FULL-STACK РАЗРАБОТЧИК / ПОРТФОЛИО"
+          >
+            // FULL-STACK DEVELOPER / PORTFOLIO
+          </p>
+          <h1 class="hero__title">
+            <span class="hero__title-author"
+              >SymNearOne:<span class="terminal-path">~</span>$ </span
+            ><span
+              data-en="Hi, I'm Andrew — I build web applications with React and Django REST Framework"
+              data-ru="Привет, я Эндрю — разрабатываю веб-приложения на React и Django REST Framework"
+              >Hi, I'm Andrew — I build web applications with React and Django
+              REST Framework</span
+            ><span class="hero__cursor">_</span>
+          </h1>
+          <p
+            class="hero__description"
+            data-en="I enjoy turning ideas into functional, thoughtful, and user-friendly products."
+            data-ru="Мне нравится превращать идеи в функциональные, продуманные и удобные продукты."
+          >
+            I enjoy turning ideas into functional, thoughtful, and user-friendly
+            products.
+          </p>
+          <div class="hero__actions">
+            <a
+              href="projects.html"
+              class="button button--primary"
+              data-en="Explore projects"
+              data-ru="Посмотреть проекты"
+              ><img class="button__icon" src="sources/icons/arrow-up-right.svg" alt="" aria-hidden="true" />Explore projects</a
+            ><a
+              href="https://github.com/Na1x-dev"
+              class="button button--secondary"
+              target="_blank"
+              rel="noreferrer"
+              ><img
+                class="button__icon"
+                src="sources/icons/github.svg"
+                alt=""
+                aria-hidden="true"
+              />GitHub</a
+            >
+          </div>
         </div>
-    </div>
-
-
-    <div id="cyber-particles"></div>
-    <div class="global-hud-grid"></div>
-    <div class="grid-wrapper">
-        <header class="cyber-hud-header">
-            <div class="hud-panel-tag">SYSTEM_NAVIGATION_BAR</div>
-            <div class="hud-header-content">
-                <div class="nav-brand" id="hud-version-brand">
-                    <!-- Загрузится из конфига -->
-                </div>
-                <nav class="nav-menu">
-                    <a href="#about" class="nav-box active">
-                        <span class="num magenta-txt">01/</span><span class="txt">ABOUT_ME</span>
-                    </a>
-                    <a href="#skills" class="nav-box">
-                        <span class="num copper-txt">02/</span><span class="txt">SKILLS_LOG</span>
-                    </a>
-                    <a href="#portfolio" class="nav-box">
-                        <span class="num cyan-txt">03/</span><span class="txt">PROJ_BIN</span>
-                    </a>
-                </nav>
-                <div class="nav-terminal-status">
-                    <span class="matrix-txt">GRID_LINK: ONLINE</span>
-                </div>
+        <div class="hero__visual">
+          <div class="terminal-window">
+            <div class="terminal-window__bar">
+              <span class="terminal-window__bar-status"></span>
+              <span>user@terminal: ~</span>
+              <div class="terminal-window__dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
             </div>
-        </header>
-        
-        <div class="sys-banner">
-            <span class="cyan-txt">> MONITOR_OUTPUT: 100%_SCREEN_MATRIX</span>
-            <span class="magenta-txt">[SCAN_GRID: ACTIVE]</span>
+            <div
+              class="terminal-window__content"
+              id="terminal-output"
+              role="log"
+              aria-live="polite"
+            >
+              <p
+                class="terminal-output"
+                data-en="Welcome to my portfolio terminal. Type help to see available commands."
+                data-ru="Добро пожаловать в терминал портфолио. Введите help для списка команд."
+              >
+                Welcome to my portfolio terminal. Type help to see available
+                commands.
+              </p>
+            </div>
+            <form class="terminal-input" id="terminal-form" autocomplete="off">
+              <label class="terminal-input__prompt" for="terminal-command"
+                >user@terminal:<span class="terminal-path">~</span>$</label
+              ><input
+                id="terminal-command"
+                name="command"
+                type="text"
+                spellcheck="false"
+                placeholder="type help and press Enter"
+              /><button type="submit" aria-label="Run command"><img class="button__icon" src="sources/icons/terminal-enter.svg" alt="" aria-hidden="true" /></button>
+            </form>
+          </div>
         </div>
-
-        <main class="main-matrix-grid">
-            <!-- Левая колонка: Профиль -->
-            <section class="grid-cell" id="about">
-                <div class="flat-panel border-magenta">
-                    <div class="panel-tag tag-magenta">HOST_USER_DATA</div>
-                    <div class="matrix-avatar">
-                        <div class="avatar-lines"></div>
-                        <span class="avatar-label">[MATRIX_SCAN_ACTIVE]</span>
-                    </div>
-                    <h2 class="magenta-txt" id="profile-name"><!-- Из конфига --></h2>
-                    <p class="matrix-txt">// ДЕКЛАРАЦИЯ_ЦЕЛЕЙ:</p>
-                    <p class="dim-cyan-txt" id="profile-declaration"><!-- Из конфига --></p>
-                    <p class="matrix-txt">// ДОПОЛНИТЕЛЬНЫЙ_БЭКГРАУНД:</p>
-                    <p class="dim-cyan-txt" id="profile-background"><!-- Из конфига --></p>
-                    <div class="contact-terminal">
-                        <p class="matrix-txt">[COMM_CHANNELS_SECURE]:</p>
-                        <a href="#" id="link-tg" class="btn-flat text-magenta">> TELEGRAM_NODE</a>
-                        <a href="#" id="link-gh" class="btn-flat text-cyan">> GITHUB_REPOS</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Центральная колонка: Стек и Логи -->
-            <section class="grid-cell" id="skills">
-                <div class="flat-panel border-copper">
-                    <div class="panel-tag tag-copper">CORE_SKILLS_LOG</div>
-                    <div class="console-box">
-                        <p class="console-input"><span class="copper-txt">root@dev:~#</span> get_skills --loaded</p>
-                        <!-- Сюда JS вставит шкалы -->
-                        <div class="matrix-list" id="skills-container"></div>
-                    </div>
-                </div>
-                <div class="flat-panel border-cyan">
-                    <div class="panel-tag tag-cyan">LIVE_STREAM_LOG</div>
-                    <!-- Сюда JS вставит логи -->
-                    <div class="stream-box" id="logs-container"></div>
-                </div>
-            </section>
-
-            <!-- Правая колонка: Хранилище портфолио -->
-            <section class="grid-cell cell-wide" id="portfolio">
-                <div class="flat-panel border-magenta">
-                    <div class="panel-tag tag-magenta">PROJECTS_STORAGE_BIN</div>
-                    <!-- Сюда JS вставит карточки проектов -->
-                    <div class="portfolio-container" id="projects-container"></div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="cyber-base-footer">
-            <div class="footer-left-side">[NODE_ADDRESS]: <span class="matrix-txt" id="footer-node"><!-- Из конфига --></span></div>
-            <div class="footer-right-side"><span class="magenta-txt">HOST_PORTFOLIO:</span> <span class="cyan-txt">gh-pages</span></div>
-        </footer>
-    </div>
-       <!-- Изменено: добавлен атрибут type="module" -->
-    <script src="script.js" type="module"></script>
-</body>
-</html>
-
-</body>
+      </section>
+      <div class="section-divider" aria-hidden="true"></div>
+      <section class="about" id="projects">
+        <p
+          class="section-label"
+          data-en="// SELECTED PROJECTS"
+          data-ru="// ИЗБРАННЫЕ ПРОЕКТЫ"
+        >
+          // SELECTED PROJECTS
+        </p>
+        <h2
+          class="about__text"
+          data-en="I've built a variety of applications and software solutions. Here are two projects I'm especially happy to share."
+          data-ru="Я разрабатывал разные приложения и программные решения. Здесь — два проекта, которыми особенно хочу поделиться."
+        >
+          I've built a variety of applications and software solutions. Here are
+          two projects I'm especially happy to share.
+        </h2>
+        <div class="projects-grid" id="featured-projects"></div>
+        <div class="section-actions">
+          <a
+            class="button button--secondary"
+            href="projects.html"
+            data-en="Browse all projects"
+            data-ru="Все проекты"
+            ><img class="button__icon" src="sources/icons/arrow-up-right.svg" alt="" aria-hidden="true" />Browse all projects</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <span>SymNearOne</span>
+      <span data-en="BUILT WITH CURIOSITY" data-ru="СОЗДАНО С ЛЮБОПЫТСТВОМ">BUILT WITH CURIOSITY</span>
+      <span id="current-year"></span>
+    </footer>
+  </body>
 </html>
