@@ -2,6 +2,12 @@
 document.addEventListener("DOMContentLoaded", function () {
   var projects = window.PORTFOLIO_PROJECTS || [];
   var language = "en";
+  try {
+    language =
+      window.localStorage.getItem("portfolio-language") === "ru" ? "ru" : "en";
+  } catch (error) {
+    language = "en";
+  }
   var onDetailPage = window.location.pathname.indexOf("/projects/") !== -1;
   var base = onDetailPage ? "../" : "";
 
@@ -33,7 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return language === "ru" ? ru || en : en;
   }
   function applyLanguage(next) {
-    language = next;
+    language = next === "ru" ? "ru" : "en";
+    try {
+      window.localStorage.setItem("portfolio-language", language);
+    } catch (error) {
+      // Language still changes for the current page if storage is unavailable.
+    }
     document.documentElement.lang = language;
     document.querySelectorAll("[data-en][data-ru]").forEach(function (el) {
       var icon = el.querySelector(".button__icon");
@@ -190,7 +201,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var year = document.querySelector("#current-year");
   if (year) year.textContent = new Date().getFullYear();
-  applyLanguage("en");
+  applyLanguage(language);
+  window.requestAnimationFrame(function () {
+    window.requestAnimationFrame(function () {
+      document.documentElement.classList.remove("is-loading");
+    });
+  });
 
   var form = document.querySelector("#terminal-form");
   var input = document.querySelector("#terminal-command");
